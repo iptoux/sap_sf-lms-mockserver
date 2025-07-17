@@ -5,6 +5,30 @@
 **Entwickelt von:** Manus AI  
 
 ---
+## Inhaltsverzeichnis
+
+1.  [Übersicht](#1-übersicht)
+2.  [Schnellstart](#2-schnellstart)
+3.  [REST API Endpunkte](#3-rest-api-endpunkte)
+    *   [3.1. System-Endpunkte](#31-system-endpunkte)
+    *   [3.2. Partner Extract Configuration](#32-partner-extract-configuration)
+    *   [3.3. Adhoc Data Extract](#33-adhoc-data-extract)
+4.  [OData v4 Services](#4-odata-v4-services)
+    *   [4.1. Curriculum Services](#41-curriculum-services)
+    *   [4.2. Learning Event Services](#42-learning-event-services)
+    *   [4.3. Learning Plan Service](#43-learning-plan-service)
+    *   [4.4. Scheduled Offering Services](#44-scheduled-offering-services)
+    *   [4.5. Search Services](#45-search-services)
+    *   [4.6. User Assignment Services](#46-user-assignment-services)
+    *   [4.7. User Learning Service](#47-user-learning-service)
+    *   [4.8. User Services](#48-user-services)
+    *   [4.9. Catalog Services](#49-catalog-services)
+    *   [4.10. Financial Transactions Service](#410-financial-transactions-service)
+5.  [Datenmodelle](#5-datenmodelle)
+6.  [Fehlerbehandlung](#6-fehlerbehandlung)
+7.  [Workflows & Beispiele](#7-workflows--beispiele)
+
+---
 
 ## 1. Übersicht
 
@@ -449,7 +473,7 @@ Hier sind die primären Datenmodelle, die in den API-Antworten verwendet werden.
 
 2.  **Aktive Curricula filtern:**
     ```bash
-    curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$filter=status eq 'Active'"
+    curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$filter=status eq 'Active'"
     ```
 
 3.  **Benutzerspezifische Ansicht abrufen:**
@@ -494,22 +518,22 @@ Hier sind die primären Datenmodelle, die in den API-Antworten verwendet werden.
 
 - **Paginierung (Erste 10, dann nächste 10):**
   ```bash
-  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$top=10"
-  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$top=10&$$skip=10"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$top=10"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$top=10&$skip=10"
   ```
 
 - **Feldauswahl (Nur ID und Titel):**
   ```bash
-  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$select=curriculumID,title"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$select=curriculumID,title"
   ```
 
 - **Sortierung (Nach Titel aufsteigend):**
   ```bash
-  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$orderby=title"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$orderby=title"
   ```
 
 - **Kombinierte Abfrage:**
   ```bash
   # Aktive Curricula, nur ID/Titel/Status, nach Titel sortiert, die ersten 5
-  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$filter=status eq 'Active'&$$select=curriculumID,title,status&$$orderby=title&$$top=5"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$filter=status eq 'Active'&$select=curriculumID,title,status&$orderby=title&$top=5"
   ```
