@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  sap-lms-mockserver:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
+    volumes:
+      - ./src/database:/app/src/database
+    restart: unless-stopped
+    container_name: sap-lms-server

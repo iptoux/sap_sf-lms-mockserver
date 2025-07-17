@@ -1,0 +1,39 @@
+# Git-Verzeichnis
+.git
+.gitignore
+
+# Python-spezifische Dateien
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+
+# Virtuelle Umgebung
+venv/
+env/
+.venv/
+
+# IDE-Dateien
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Lokale Konfigurationsdateien
+.env
+.env.local
+
+# OS-spezifische Dateien
+.DS_Store
+Thumbs.db
+
+# Dokumentation (optional, falls Sie diese nicht im Image benötigen)
+README.md
+API_DOCUMENTATION.md
+SF_LRN_Web_Svc_Integ.pdf
+
+# Lokale Datenbank (falls vorhanden)
+src/database/app.db
