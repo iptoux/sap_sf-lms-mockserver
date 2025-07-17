@@ -1,4 +1,14 @@
-# SAP SuccessFactors LMS MockServer
+<div align="center">
+<h1>SAP SuccessFactors LMS MockServer</h1>
+
+**📅 Letzte Aktualisierung:** Juli 2025 | **🏷️ Version:** 1.0.0
+
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
+
+</div>
 
 Ein vollständiger Mock-Server für die SAP SuccessFactors Learning Management System (LMS) API mit realistischen Mock-Daten und OData v4 Unterstützung.
 
@@ -9,9 +19,7 @@ Ein vollständiger Mock-Server für die SAP SuccessFactors Learning Management S
 - [Architektur](#architektur)
 - [Installation](#installation)
 - [Konfiguration](#konfiguration)
-- [API-Endpunkte](#api-endpunkte)
-- [OData-Unterstützung](#odata-unterstützung)
-- [Mock-Daten](#mock-daten)
+- [API-Dokumentation](#api-dokumentation)
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [Docker](#docker)
@@ -75,11 +83,13 @@ sap-lms-mockserver/
 │   │   └── ... (weitere 30+ Dateien)
 │   ├── database/              # SQLite-Datenbank
 │   └── static/                # Statische Dateien
+├── docs/                      # Dokumentation
+│   └── API_DOCUMENTATION.md   # Detaillierte API-Dokumentation
 ├── Dockerfile                 # Docker-Konfiguration
 ├── docker-compose.yml         # Docker Compose
 ├── requirements.txt           # Python-Abhängigkeiten
 ├── LICENSE                    # MIT-Lizenz
-└── README.md                  # Diese Dokumentation
+└── README.md                  # Projekt-Dokumentation
 ```
 
 ## Installation
@@ -148,246 +158,57 @@ PORT=5001
 HOST=0.0.0.0
 ```
 
-## API-Endpunkte
+## API-Dokumentation
 
-### 🔧 System-Endpunkte
+Eine detaillierte API-Dokumentation mit allen Endpunkten, Parametern und Beispielen finden Sie in der [**API_DOCUMENTATION.md**](docs/API_DOCUMENTATION.md).
+
+### 🔧 Schnellstart - Wichtige Endpunkte
 
 #### Health Check
 ```bash
-GET /health
+curl -X GET http://localhost:5001/health
 ```
-
-#### Root Information
-```bash
-GET /
-```
-
-### 🔄 Partner Extract Services
 
 #### Partner Extract Configuration
 ```bash
-GET /learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001
-PUT /learning/public-api/rest/v1/partnerExtractConfig
+curl -X GET "http://localhost:5001/learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001"
 ```
 
-#### Adhoc Data Extract
+#### Curriculum Service
 ```bash
-PUT /learning/public-api/rest/v1/adhocDataExtract?partnerID=PARTNER001
+curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
 ```
 
-### 📚 Curriculum Services
+### 📚 API-Kategorien
 
-#### Admin Curriculum Service
+- **System-Endpunkte** - Health Check, Root Information
+- **Partner Extract Services** - Konfiguration und Datenextraktion
+- **Curriculum Services** - Admin und User Curriculum Management
+- **Learning Event Services** - Lernereignisse und externe Events
+- **Scheduled Offering Services** - Geplante Kursangebote
+- **Search Services** - Suche nach Programmen, Studenten und Items
+- **User Assignment Services** - Benutzer-Zuweisungen (v1 und v2)
+- **User Learning Service** - Lernhistorie und Fortschritte
+- **User Services** - Benutzerverwaltung und Genehmigungen
+- **Catalog Services** - Katalogsuche und -verwaltung
+- **Financial Transactions** - Finanztransaktionen
+
+### 🔍 OData v4 Unterstützung
+
+Der Server unterstützt alle wichtigen OData v4 Query-Parameter:
+
+- `$filter` - Filterung der Ergebnisse
+- `$select` - Auswahl spezifischer Felder
+- `$expand` - Erweitern verwandter Entitäten
+- `$orderby` - Sortierung der Ergebnisse
+- `$top` - Begrenzung der Anzahl Ergebnisse
+- `$skip` - Überspringen von Ergebnissen
+- `$count` - Anzahl der Ergebnisse einschließen
+
+**Beispiel:**
 ```bash
-GET /learning/odatav4/public/admin/curriculum-service/v1/$metadata
-GET /learning/odatav4/public/admin/curriculum-service/v1/Curricula
-```
-
-#### User Curriculum Service
-```bash
-GET /learning/odatav4/public/user/curriculum-service/v1/$metadata
-GET /learning/odatav4/public/user/curriculum-service/v1/Curricula
-```
-
-### 📖 Learning Event Services
-
-#### Admin Learning Event Service
-```bash
-GET /learning/odatav4/public/admin/learningevent-service/v1/$metadata
-POST /learning/odatav4/public/admin/learningevent-service/v1/recordLearningEvents
-```
-
-#### User Learning Event Service
-```bash
-GET /learning/odatav4/public/user/learningevent-service/v1/$metadata
-GET /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
-POST /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
-```
-
-### 📋 Learning Plan Service
-```bash
-GET /learning/odatav4/public/user/learningplan-service/v1/$metadata
-GET /learning/odatav4/public/user/learningplan-service/v1/LearningPlans
-```
-
-### 🗓️ Scheduled Offering Services
-
-#### Admin Scheduled Offering Service
-```bash
-GET /learning/odatav4/public/admin/scheduledoffering-service/v1/$metadata
-GET /learning/odatav4/public/admin/scheduledoffering-service/v1/ScheduledOfferings
-```
-
-#### User Scheduled Offering Service
-```bash
-GET /learning/odatav4/public/user/scheduledoffering-service/v1/$metadata
-GET /learning/odatav4/public/user/scheduledoffering-service/v1/ScheduledOfferings
-```
-
-### 🔍 Search Services
-
-#### Admin Search Service
-```bash
-GET /learning/odatav4/public/admin/search-service/v1/$metadata
-GET /learning/odatav4/public/admin/search-service/v1/Programs
-GET /learning/odatav4/public/admin/search-service/v1/Students
-GET /learning/odatav4/public/admin/search-service/v1/Items
-```
-
-### 👥 User Assignment Services
-
-#### v1 User Assignment Service
-```bash
-GET /learning/odatav4/public/user/userassignment-service/v1/$metadata
-GET /learning/odatav4/public/user/userassignment-service/v1/UserPrograms
-```
-
-#### v2 User Assignment Service
-```bash
-GET /learning/odatav4/public/user/userassignment-service/v2/$metadata
-POST /learning/odatav4/public/user/userassignment-service/v2/itemAssignments
-POST /learning/odatav4/public/user/userassignment-service/v2/removeItemAssignments
-```
-
-### 📊 User Learning Service
-```bash
-GET /learning/odatav4/public/user/userlearning-service/v1/$metadata
-GET /learning/odatav4/public/user/userlearning-service/v1/LearningHistories
-```
-
-### 👤 User Services
-
-#### Admin User Services
-```bash
-GET /learning/odatav4/public/admin/user-service/v1/$metadata
-GET /learning/odatav4/public/admin/user-service/v2/$metadata
-POST /learning/odatav4/public/admin/user-service/v2/MergeUsers
-GET /learning/odatav4/public/admin/user-service/v2/Users
-```
-
-#### User Services
-```bash
-GET /learning/odatav4/public/user/user-service/v1/$metadata
-GET /learning/odatav4/public/user/user-service/v1/Approvals
-GET /learning/odatav4/public/user/user-service/v2/$metadata
-GET /learning/odatav4/public/user/user-service/v2/UserAssignments
-```
-
-### 🛒 Catalog Services
-
-#### Catalog Search
-```bash
-GET /learning/odatav4/catalogSearch/v1/$metadata
-GET /learning/odatav4/catalogSearch/v1/CatalogItems
-```
-
-#### User Catalog Search
-```bash
-GET /learning/odatav4/public/user/catalogSearch/v1/$metadata
-GET /learning/odatav4/public/user/catalogSearch/v1/CatalogItems
-```
-
-#### Admin Catalog Service
-```bash
-GET /learning/odatav4/public/admin/catalog-service/v1/$metadata
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CoursesFeed
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CurriculaFeed
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/ProgramsFeed
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CollectionsFeed
-```
-
-### 💰 Financial Transactions Service
-```bash
-GET /learning/odatav4/public/admin/financialtransactions/v1/$metadata
-GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransactions
-```
-
-## OData-Unterstützung
-
-### Unterstützte Query-Parameter
-
-| Parameter | Beschreibung | Beispiel |
-|-----------|-------------|----------|
-| `$filter` | Filterung der Ergebnisse | `status eq 'Active'` |
-| `$select` | Auswahl spezifischer Felder | `curriculumID,title,status` |
-| `$expand` | Erweitern verwandter Entitäten | `items` |
-| `$orderby` | Sortierung der Ergebnisse | `title asc` |
-| `$top` | Begrenzung der Anzahl Ergebnisse | `10` |
-| `$skip` | Überspringen von Ergebnissen | `20` |
-| `$count` | Anzahl der Ergebnisse einschließen | `true` |
-
-### Beispiel OData-Queries
-
-```bash
-# Top 5 Curricula abrufen
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$top=5"
-
-# Curricula mit Count abrufen
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$count=true"
-
-# Spezifische Felder auswählen
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$select=curriculumID,title,status"
-
-# Aktive Curricula filtern
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'"
-
-# Kombinierte Query
 curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'&\$select=curriculumID,title&\$top=10"
 ```
-
-## Mock-Daten
-
-### Datenstruktur
-
-Alle Mock-Daten sind in separaten JSON-Dateien im `src/mock_data/` Verzeichnis organisiert:
-
-#### Curriculum-Daten (`catalog_curricula.json`)
-```json
-{
-  "@odata.context": "$metadata#CurriculaFeed",
-  "value": [
-    {
-      "curriculumID": "CURR_001",
-      "title": "Management Development Program",
-      "description": "Comprehensive management development curriculum",
-      "category": "Leadership",
-      "difficulty": "Intermediate",
-      "totalDuration": 40.0,
-      "totalItems": 5,
-      "status": "Active",
-      "items": [...]
-    }
-  ]
-}
-```
-
-#### Kurs-Daten (`catalog_courses.json`)
-```json
-{
-  "@odata.context": "$metadata#CoursesFeed",
-  "value": [
-    {
-      "courseID": "COURSE_001",
-      "title": "Leadership Fundamentals",
-      "description": "Essential leadership skills for new managers",
-      "category": "Leadership",
-      "difficulty": "Beginner",
-      "duration": 8.0,
-      "language": "English",
-      "status": "Active"
-    }
-  ]
-}
-```
-
-### Daten-Konsistenz
-
-✅ **Konsistente Eigenschaften:**
-- Alle IDs sind konsistent zwischen verschiedenen Endpunkten
-- Realistische Zeitstempel und Daten
-- Logische Beziehungen zwischen Entitäten
-- Verschiedene Status-Werte für realistische Szenarien
 
 ## Testing
 
@@ -403,9 +224,6 @@ curl -X GET "http://localhost:5001/learning/public-api/rest/v1/partnerExtractCon
 
 # Curriculum Metadata
 curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/\$metadata"
-
-# Curriculum Data
-curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
 ```
 
 #### Browser-Tests
@@ -542,18 +360,6 @@ def new_endpoint_metadata():
     """Get new endpoint metadata"""
     data = load_mock_data('new_endpoint_metadata.json')
     return jsonify(data)
-
-@sap_lms_bp.route('/new/endpoint/v1/Data', methods=['GET'])
-def new_endpoint_data():
-    """Get new endpoint data"""
-    query_params = parse_odata_query(request)
-    data = load_mock_data('new_endpoint_data.json')
-    
-    return jsonify(create_odata_response(
-        data.get('value', []),
-        "$metadata#Data",
-        len(data.get('value', [])) if query_params['count'] else None
-    ))
 ```
 
 ### 📝 Logging konfigurieren
@@ -640,7 +446,7 @@ Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details
 ### 📞 Hilfe und Unterstützung
 
 - **GitHub Issues:** Bug-Reports und Feature-Requests
-- **Dokumentation:** Detaillierte API-Informationen in [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+- **API-Dokumentation:** Detaillierte Endpunkt-Informationen in [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)
 - **Community:** Diskussionen über GitHub Discussions
 
 ### 🆘 Schnelle Hilfe
@@ -670,12 +476,4 @@ Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details
 
 **🔧 Entwickelt mit Unterstützung von [Manus AI](https://manus.im)**
 
-**📅 Letzte Aktualisierung:** Juli 2025 | **🏷️ Version:** 1.0.0
-
-[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
-
 </div>
-```
