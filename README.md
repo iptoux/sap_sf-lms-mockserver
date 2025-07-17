@@ -1,25 +1,49 @@
 # SAP SuccessFactors LMS MockServer
 
+Ein vollständiger Mock-Server für die SAP SuccessFactors Learning Management System (LMS) API mit realistischen Mock-Daten und OData v4 Unterstützung.
+
+## Inhaltsverzeichnis
+
+- [Übersicht](#übersicht)
+- [Features](#features)
+- [Architektur](#architektur)
+- [Installation](#installation)
+- [Konfiguration](#konfiguration)
+- [API-Endpunkte](#api-endpunkte)
+- [OData-Unterstützung](#odata-unterstützung)
+- [Mock-Daten](#mock-daten)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Docker](#docker)
+- [Anpassung](#anpassung)
+- [Troubleshooting](#troubleshooting)
+- [Beitragen](#beitragen)
+- [Lizenz](#lizenz)
+- [Support](#support)
+- [Changelog](#changelog)
+
 ## Übersicht
 
 Der SAP SuccessFactors LMS MockServer ist eine vollständige Implementierung eines Mock-Servers, der die SAP SuccessFactors Learning Management System (LMS) API emuliert. Dieser Server wurde basierend auf der offiziellen SAP SuccessFactors Learning OData APIs Dokumentation entwickelt und unterstützt alle 36 dokumentierten API-Endpunkte mit realistischen Mock-Daten.
 
-## Funktionen
+**Basis-URL:** `http://localhost:5001`
 
-### Vollständige API-Abdeckung
+## Features
+
+### 🚀 Vollständige API-Abdeckung
 - **36 API-Endpunkte** vollständig implementiert
 - **OData v4** konforme Responses
 - **REST API** Endpunkte für Partner-Integration
 - **Metadata-Endpunkte** für alle Services
-- **Daten-Endpunkte** mit CRUD-Operationen
+- **CRUD-Operationen** für Daten-Endpunkte
 
-### Realistische Mock-Daten
+### 📊 Realistische Mock-Daten
 - Separate JSON-Dateien für jeden Endpunkt
 - Strukturierte Daten entsprechend der API-Spezifikation
 - Realistische Beispieldaten für bessere Tests
 - Konsistente Datenbeziehungen zwischen Endpunkten
 
-### Entwicklerfreundlich
+### 🛠️ Entwicklerfreundlich
 - **CORS-Unterstützung** für Frontend-Integration
 - **Detaillierte Logging** für Debugging
 - **Flexible Konfiguration** über Umgebungsvariablen
@@ -30,8 +54,9 @@ Der SAP SuccessFactors LMS MockServer ist eine vollständige Implementierung ein
 ### Technologie-Stack
 - **Flask** - Python Web Framework
 - **Flask-CORS** - Cross-Origin Resource Sharing
+- **SQLAlchemy** - Database ORM
 - **JSON** - Mock-Daten-Storage
-- **Python 3.11** - Runtime Environment
+- **Python 3.12** - Runtime Environment
 
 ### Projektstruktur
 ```
@@ -48,55 +73,74 @@ sap-lms-mockserver/
 │   │   ├── admin_curriculum_service_metadata.json
 │   │   ├── catalog_courses.json
 │   │   └── ... (weitere 30+ Dateien)
+│   ├── database/              # SQLite-Datenbank
 │   └── static/                # Statische Dateien
-├── venv/                      # Virtuelle Umgebung
+├── Dockerfile                 # Docker-Konfiguration
+├── docker-compose.yml         # Docker Compose
 ├── requirements.txt           # Python-Abhängigkeiten
+├── LICENSE                    # MIT-Lizenz
 └── README.md                  # Diese Dokumentation
 ```
 
-## Installation und Setup
+## Installation
 
 ### Voraussetzungen
-- Python 3.11 oder höher
+- Python 3.12 oder höher
 - pip (Python Package Manager)
 - Git (für Klonen des Repositories)
 
-### Schritt-für-Schritt Installation
+### 🐍 Lokale Installation
 
 1. **Repository klonen**
-```bash
-git clone <repository-url>
-cd sap-lms-mockserver
-```
+   ```bash
+   git clone <repository-url>
+   cd sap-lms-mockserver
+   ```
 
-2. **Virtuelle Umgebung aktivieren**
-```bash
-source venv/bin/activate  # Linux/Mac
-# oder
-venv\Scripts\activate     # Windows
-```
+2. **Virtuelle Umgebung erstellen und aktivieren**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   # oder
+   venv\Scripts\activate     # Windows
+   ```
 
 3. **Abhängigkeiten installieren**
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 4. **Server starten**
-```bash
-python src/main.py
-```
+   ```bash
+   python src/main.py
+   ```
 
 Der Server läuft standardmäßig auf `http://localhost:5001`
 
-### Konfiguration
+### 🐳 Docker Installation
 
-#### Umgebungsvariablen
-- `FLASK_ENV` - Umgebung (development/production)
-- `FLASK_DEBUG` - Debug-Modus (True/False)
-- `PORT` - Server-Port (Standard: 5001)
-- `HOST` - Server-Host (Standard: 0.0.0.0)
+```bash
+# Docker Image erstellen
+docker build -t sap-lms-mockserver .
 
-#### Beispiel .env Datei
+# Container starten
+docker run -p 5001:5001 sap-lms-mockserver
+
+# Oder mit Docker Compose
+docker-compose up -d
+```
+
+## Konfiguration
+
+### Umgebungsvariablen
+| Variable | Beschreibung | Standard |
+|----------|-------------|----------|
+| `FLASK_ENV` | Umgebung (development/production) | `production` |
+| `FLASK_DEBUG` | Debug-Modus | `False` |
+| `PORT` | Server-Port | `5001` |
+| `HOST` | Server-Host | `0.0.0.0` |
+
+### Beispiel .env Datei
 ```env
 FLASK_ENV=development
 FLASK_DEBUG=True
@@ -106,155 +150,175 @@ HOST=0.0.0.0
 
 ## API-Endpunkte
 
-### 1. Partner Extract Configuration
-**Endpunkt:** `/learning/public-api/rest/v1/partnerExtractConfig`
+### 🔧 System-Endpunkte
 
-**Methoden:** GET, PUT
-
-**Beschreibung:** Konfiguration für Partner-Datenextraktion
-
-**Beispiel Request:**
+#### Health Check
 ```bash
-curl -X GET "http://localhost:5001/learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001"
+GET /health
 ```
 
-**Beispiel Response:**
-```json
-{
-  "restOperationStatusVOX": {
-    "operation": null,
-    "status": "SUCCESS",
-    "data": {
-      "sftpPath": "/customer/subfolder/path",
-      "partnerID": "PARTNER001",
-      "enabled": true,
-      "email": "partner@example.com",
-      "keyOwner": "SAP_LMS_ADMIN",
-      "encryptionKey": "AES256_ENCRYPTION_KEY_PLACEHOLDER",
-      "lastExtractDate": "2024-01-15T10:30:00Z",
-      "extractFrequency": "DAILY"
-    }
-  },
-  "errors": null,
-  "warnings": null
-}
-```
-
-### 2. Adhoc Data Extract
-**Endpunkt:** `/learning/public-api/rest/v1/adhocDataExtract`
-
-**Methoden:** PUT
-
-**Beschreibung:** Erstellt eine Ad-hoc-Datenextraktion
-
-### 3. Admin Curriculum Service
-**Basis-URL:** `/learning/odatav4/public/admin/curriculum-service/v1`
-
-**Endpunkte:**
-- `/$metadata` - Service-Metadaten
-- `/Curricula` - Curriculum-Daten (GET)
-
-**Beispiel Request:**
+#### Root Information
 ```bash
-curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
+GET /
 ```
 
-### 4. User Curriculum Service
-**Basis-URL:** `/learning/odatav4/public/user/curriculum-service/v1`
+### 🔄 Partner Extract Services
 
-**Endpunkte:**
-- `/$metadata` - Service-Metadaten
-- `/Curricula` - Benutzer-spezifische Curriculum-Daten
+#### Partner Extract Configuration
+```bash
+GET /learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001
+PUT /learning/public-api/rest/v1/partnerExtractConfig
+```
 
-### 5. Learning Event Services
-**Admin:** `/learning/odatav4/public/admin/learningevent-service/v1`
-**User:** `/learning/odatav4/public/user/learningevent-service/v1`
+#### Adhoc Data Extract
+```bash
+PUT /learning/public-api/rest/v1/adhocDataExtract?partnerID=PARTNER001
+```
 
-**Funktionen:**
-- Aufzeichnung von Lernereignissen
-- Externe Lernereignisse verwalten
-- Lernhistorie abrufen
+### 📚 Curriculum Services
 
-### 6. Learning Plan Service
-**Basis-URL:** `/learning/odatav4/public/user/learningplan-service/v1`
+#### Admin Curriculum Service
+```bash
+GET /learning/odatav4/public/admin/curriculum-service/v1/$metadata
+GET /learning/odatav4/public/admin/curriculum-service/v1/Curricula
+```
 
-**Endpunkte:**
-- `/$metadata` - Service-Metadaten
-- `/LearningPlans` - Lernpläne abrufen
+#### User Curriculum Service
+```bash
+GET /learning/odatav4/public/user/curriculum-service/v1/$metadata
+GET /learning/odatav4/public/user/curriculum-service/v1/Curricula
+```
 
-### 7. Scheduled Offering Services
-**Admin:** `/learning/odatav4/public/admin/scheduledoffering-service/v1`
-**User:** `/learning/odatav4/public/user/scheduledoffering-service/v1`
+### 📖 Learning Event Services
 
-**Funktionen:**
-- Geplante Kursangebote verwalten
-- Anmeldungen verwalten
-- Teilnehmerlisten abrufen
+#### Admin Learning Event Service
+```bash
+GET /learning/odatav4/public/admin/learningevent-service/v1/$metadata
+POST /learning/odatav4/public/admin/learningevent-service/v1/recordLearningEvents
+```
 
-### 8. Search Services
-**Admin:** `/learning/odatav4/public/admin/search-service/v1`
+#### User Learning Event Service
+```bash
+GET /learning/odatav4/public/user/learningevent-service/v1/$metadata
+GET /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
+POST /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
+```
 
-**Endpunkte:**
-- `/Programs` - Programme suchen
-- `/Students` - Studenten suchen
-- `/Items` - Lernelemente suchen
+### 📋 Learning Plan Service
+```bash
+GET /learning/odatav4/public/user/learningplan-service/v1/$metadata
+GET /learning/odatav4/public/user/learningplan-service/v1/LearningPlans
+```
 
-### 9. User Assignment Services
-**v1:** `/learning/odatav4/public/user/userassignment-service/v1`
-**v2:** `/learning/odatav4/public/user/userassignment-service/v2`
+### 🗓️ Scheduled Offering Services
 
-**Funktionen:**
-- Benutzer-Zuweisungen verwalten
-- Programm-Zuweisungen
-- Element-Zuweisungen
+#### Admin Scheduled Offering Service
+```bash
+GET /learning/odatav4/public/admin/scheduledoffering-service/v1/$metadata
+GET /learning/odatav4/public/admin/scheduledoffering-service/v1/ScheduledOfferings
+```
 
-### 10. User Learning Service
-**Basis-URL:** `/learning/odatav4/public/user/userlearning-service/v1`
+#### User Scheduled Offering Service
+```bash
+GET /learning/odatav4/public/user/scheduledoffering-service/v1/$metadata
+GET /learning/odatav4/public/user/scheduledoffering-service/v1/ScheduledOfferings
+```
 
-**Endpunkte:**
-- `/LearningHistories` - Lernhistorie abrufen
-- `/learninghistorys` - Einzelne Lernhistorie-Einträge
+### 🔍 Search Services
 
-### 11. User Services
-**Admin v1:** `/learning/odatav4/public/admin/user-service/v1`
-**Admin v2:** `/learning/odatav4/public/admin/user-service/v2`
-**User v1:** `/learning/odatav4/public/user/user-service/v1`
-**User v2:** `/learning/odatav4/public/user/user-service/v2`
+#### Admin Search Service
+```bash
+GET /learning/odatav4/public/admin/search-service/v1/$metadata
+GET /learning/odatav4/public/admin/search-service/v1/Programs
+GET /learning/odatav4/public/admin/search-service/v1/Students
+GET /learning/odatav4/public/admin/search-service/v1/Items
+```
 
-**Funktionen:**
-- Benutzerverwaltung
-- Benutzer-Zusammenführung
-- Genehmigungen verwalten
+### 👥 User Assignment Services
 
-### 12. Catalog Services
-**Search:** `/learning/odatav4/catalogSearch/v1`
-**User Search:** `/learning/odatav4/public/user/catalogSearch/v1`
-**Admin Catalog:** `/learning/odatav4/public/admin/catalog-service/v1`
+#### v1 User Assignment Service
+```bash
+GET /learning/odatav4/public/user/userassignment-service/v1/$metadata
+GET /learning/odatav4/public/user/userassignment-service/v1/UserPrograms
+```
 
-**Funktionen:**
-- Katalog durchsuchen
-- Kurse, Curricula, Programme abrufen
-- Sammlungen verwalten
+#### v2 User Assignment Service
+```bash
+GET /learning/odatav4/public/user/userassignment-service/v2/$metadata
+POST /learning/odatav4/public/user/userassignment-service/v2/itemAssignments
+POST /learning/odatav4/public/user/userassignment-service/v2/removeItemAssignments
+```
 
-### 13. Financial Transactions
-**Basis-URL:** `/learning/odatav4/public/admin/financialtransactions/v1`
+### 📊 User Learning Service
+```bash
+GET /learning/odatav4/public/user/userlearning-service/v1/$metadata
+GET /learning/odatav4/public/user/userlearning-service/v1/LearningHistories
+```
 
-**Endpunkte:**
-- `/$metadata` - Service-Metadaten
-- `/FinancialTransactions` - Finanztransaktionen abrufen
+### 👤 User Services
+
+#### Admin User Services
+```bash
+GET /learning/odatav4/public/admin/user-service/v1/$metadata
+GET /learning/odatav4/public/admin/user-service/v2/$metadata
+POST /learning/odatav4/public/admin/user-service/v2/MergeUsers
+GET /learning/odatav4/public/admin/user-service/v2/Users
+```
+
+#### User Services
+```bash
+GET /learning/odatav4/public/user/user-service/v1/$metadata
+GET /learning/odatav4/public/user/user-service/v1/Approvals
+GET /learning/odatav4/public/user/user-service/v2/$metadata
+GET /learning/odatav4/public/user/user-service/v2/UserAssignments
+```
+
+### 🛒 Catalog Services
+
+#### Catalog Search
+```bash
+GET /learning/odatav4/catalogSearch/v1/$metadata
+GET /learning/odatav4/catalogSearch/v1/CatalogItems
+```
+
+#### User Catalog Search
+```bash
+GET /learning/odatav4/public/user/catalogSearch/v1/$metadata
+GET /learning/odatav4/public/user/catalogSearch/v1/CatalogItems
+```
+
+#### Admin Catalog Service
+```bash
+GET /learning/odatav4/public/admin/catalog-service/v1/$metadata
+GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed
+GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CoursesFeed
+GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CurriculaFeed
+GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/ProgramsFeed
+GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CollectionsFeed
+```
+
+### 💰 Financial Transactions Service
+```bash
+GET /learning/odatav4/public/admin/financialtransactions/v1/$metadata
+GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransactions
+```
 
 ## OData-Unterstützung
 
 ### Unterstützte Query-Parameter
-- `$filter` - Filterung der Ergebnisse
-- `$select` - Auswahl spezifischer Felder
-- `$expand` - Erweitern verwandter Entitäten
-- `$orderby` - Sortierung der Ergebnisse
-- `$top` - Begrenzung der Anzahl Ergebnisse
-- `$skip` - Überspringen von Ergebnissen
-- `$count` - Anzahl der Ergebnisse einschließen
+
+| Parameter | Beschreibung | Beispiel |
+|-----------|-------------|----------|
+| `$filter` | Filterung der Ergebnisse | `status eq 'Active'` |
+| `$select` | Auswahl spezifischer Felder | `curriculumID,title,status` |
+| `$expand` | Erweitern verwandter Entitäten | `items` |
+| `$orderby` | Sortierung der Ergebnisse | `title asc` |
+| `$top` | Begrenzung der Anzahl Ergebnisse | `10` |
+| `$skip` | Überspringen von Ergebnissen | `20` |
+| `$count` | Anzahl der Ergebnisse einschließen | `true` |
 
 ### Beispiel OData-Queries
+
 ```bash
 # Top 5 Curricula abrufen
 curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$top=5"
@@ -264,11 +328,18 @@ curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/
 
 # Spezifische Felder auswählen
 curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$select=curriculumID,title,status"
+
+# Aktive Curricula filtern
+curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'"
+
+# Kombinierte Query
+curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'&\$select=curriculumID,title&\$top=10"
 ```
 
 ## Mock-Daten
 
 ### Datenstruktur
+
 Alle Mock-Daten sind in separaten JSON-Dateien im `src/mock_data/` Verzeichnis organisiert:
 
 #### Curriculum-Daten (`catalog_curricula.json`)
@@ -311,6 +382,8 @@ Alle Mock-Daten sind in separaten JSON-Dateien im `src/mock_data/` Verzeichnis o
 ```
 
 ### Daten-Konsistenz
+
+✅ **Konsistente Eigenschaften:**
 - Alle IDs sind konsistent zwischen verschiedenen Endpunkten
 - Realistische Zeitstempel und Daten
 - Logische Beziehungen zwischen Entitäten
@@ -318,10 +391,9 @@ Alle Mock-Daten sind in separaten JSON-Dateien im `src/mock_data/` Verzeichnis o
 
 ## Testing
 
-### Manuelle Tests
-Der Server kann mit verschiedenen Tools getestet werden:
+### 🧪 Manuelle Tests
 
-#### cURL
+#### cURL-Beispiele
 ```bash
 # Health Check
 curl -X GET http://localhost:5001/health
@@ -336,17 +408,13 @@ curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-serv
 curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
 ```
 
-#### Postman
-Eine Postman-Collection kann erstellt werden mit allen verfügbaren Endpunkten für systematische Tests.
-
-#### Browser
+#### Browser-Tests
 Einfache GET-Endpunkte können direkt im Browser getestet werden:
 - `http://localhost:5001/health`
 - `http://localhost:5001/`
 - `http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/$metadata`
 
-### Automatisierte Tests
-Für Produktionsumgebungen sollten automatisierte Tests implementiert werden:
+### 🔬 Automatisierte Tests
 
 ```python
 import unittest
@@ -371,30 +439,15 @@ class TestSAPLMSMockServer(unittest.TestCase):
 
 ## Deployment
 
-### Lokale Entwicklung
+### 🖥️ Lokale Entwicklung
 ```bash
 # Entwicklungsserver starten
 python src/main.py
 ```
 
-### Docker Deployment
-```dockerfile
-FROM python:3.11-slim
+### 🏭 Produktions-Deployment
 
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY src/ ./src/
-COPY venv/ ./venv/
-
-EXPOSE 5001
-CMD ["python", "src/main.py"]
-```
-
-### Produktions-Deployment
-Für Produktionsumgebungen sollte ein WSGI-Server wie Gunicorn verwendet werden:
-
+#### Mit Gunicorn
 ```bash
 # Gunicorn installieren
 pip install gunicorn
@@ -403,16 +456,86 @@ pip install gunicorn
 gunicorn --bind 0.0.0.0:5001 --workers 4 src.main:app
 ```
 
-## Konfiguration und Anpassung
+#### Mit systemd (Linux)
+```ini
+# /etc/systemd/system/sap-lms-mockserver.service
+[Unit]
+Description=SAP LMS MockServer
+After=network.target
 
-### Mock-Daten anpassen
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/sap-lms-mockserver
+ExecStart=/opt/sap-lms-mockserver/venv/bin/gunicorn --bind 0.0.0.0:5001 --workers 4 src.main:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Docker
+
+### 🐳 Docker-Befehle
+
+```bash
+# Image erstellen
+docker build -t sap-lms-mockserver .
+
+# Container starten
+docker run -p 5001:5001 sap-lms-mockserver
+
+# Container im Hintergrund ausführen
+docker run -d -p 5001:5001 --name sap-lms-server sap-lms-mockserver
+
+# Container-Logs anzeigen
+docker logs sap-lms-server
+
+# Container stoppen
+docker stop sap-lms-server
+```
+
+### Docker Compose
+
+```yaml
+version: '3.8'
+
+services:
+  sap-lms-mockserver:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
+    volumes:
+      - ./src/database:/app/src/database
+    restart: unless-stopped
+```
+
+```bash
+# Service starten
+docker-compose up -d
+
+# Service stoppen
+docker-compose down
+
+# Logs anzeigen
+docker-compose logs -f
+```
+
+## Anpassung
+
+### 🛠️ Mock-Daten anpassen
+
 Mock-Daten können einfach durch Bearbeitung der JSON-Dateien im `src/mock_data/` Verzeichnis angepasst werden:
 
-1. **Neue Daten hinzufügen:** Einfach neue Objekte zu den Arrays hinzufügen
+1. **Neue Daten hinzufügen:** Neue Objekte zu den Arrays hinzufügen
 2. **Bestehende Daten ändern:** Werte in den JSON-Objekten modifizieren
 3. **Neue Endpunkte:** Neue JSON-Dateien erstellen und entsprechende Routen hinzufügen
 
-### Neue Endpunkte hinzufügen
+### 🔧 Neue Endpunkte hinzufügen
+
 ```python
 @sap_lms_bp.route('/new/endpoint/v1/$metadata', methods=['GET'])
 def new_endpoint_metadata():
@@ -433,7 +556,8 @@ def new_endpoint_data():
     ))
 ```
 
-### Logging konfigurieren
+### 📝 Logging konfigurieren
+
 ```python
 import logging
 
@@ -442,25 +566,19 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-
-# In Routen verwenden
-@sap_lms_bp.route('/endpoint', methods=['GET'])
-def endpoint():
-    logging.info(f"Request received for endpoint: {request.url}")
-    # ... Rest der Implementierung
 ```
 
 ## Troubleshooting
 
-### Häufige Probleme
+### 🚨 Häufige Probleme
 
 #### Port bereits belegt
 ```bash
 # Anderen Port verwenden
 python src/main.py --port 5002
 
-# Oder in main.py ändern
-app.run(host='0.0.0.0', port=5002, debug=True)
+# Prozess auf Port 5001 finden und beenden
+lsof -ti:5001 | xargs kill -9
 ```
 
 #### CORS-Fehler
@@ -485,7 +603,8 @@ source new_venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Debug-Modus
+### 🔍 Debug-Modus
+
 ```python
 # Debug-Informationen aktivieren
 app.run(host='0.0.0.0', port=5001, debug=True)
@@ -497,41 +616,66 @@ logging.getLogger('flask').setLevel(logging.DEBUG)
 
 ## Beitragen
 
-### Entwicklungsrichtlinien
+### 👥 Entwicklungsrichtlinien
+
 1. **Code-Stil:** PEP 8 befolgen
 2. **Dokumentation:** Alle neuen Funktionen dokumentieren
 3. **Tests:** Tests für neue Endpunkte hinzufügen
 4. **Mock-Daten:** Realistische und konsistente Daten verwenden
 
-### Pull Requests
+### 🔀 Pull Requests
+
 1. Fork des Repositories erstellen
-2. Feature-Branch erstellen
-3. Änderungen implementieren und testen
-4. Pull Request mit detaillierter Beschreibung erstellen
+2. Feature-Branch erstellen (`git checkout -b feature/amazing-feature`)
+3. Änderungen committen (`git commit -m 'Add amazing feature'`)
+4. Branch pushen (`git push origin feature/amazing-feature`)
+5. Pull Request erstellen
 
 ## Lizenz
 
-Dieses Projekt steht unter der MIT-Lizenz. Siehe LICENSE-Datei für Details.
+Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details.
 
 ## Support
 
-Für Fragen und Support:
-- GitHub Issues für Bug-Reports und Feature-Requests
-- Dokumentation für detaillierte API-Informationen
-- Community-Forum für allgemeine Diskussionen
+### 📞 Hilfe und Unterstützung
+
+- **GitHub Issues:** Bug-Reports und Feature-Requests
+- **Dokumentation:** Detaillierte API-Informationen in [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+- **Community:** Diskussionen über GitHub Discussions
+
+### 🆘 Schnelle Hilfe
+
+| Problem | Lösung |
+|---------|--------|
+| Server startet nicht | Port-Konflikt prüfen, Dependencies installieren |
+| API-Antworten fehlerhaft | Mock-Daten validieren, Logs prüfen |
+| CORS-Probleme | CORS-Konfiguration anpassen |
+| Docker-Probleme | Dockerfile und docker-compose.yml prüfen |
 
 ## Changelog
 
-### Version 1.0.0
-- Initiale Implementierung aller 36 SAP LMS API Endpunkte
-- Vollständige OData v4 Unterstützung
-- Realistische Mock-Daten für alle Services
-- CORS-Unterstützung für Frontend-Integration
-- Umfassende Dokumentation und Beispiele
+### 📋 Version 1.0.0 (Juli 2025)
+- ✅ Initiale Implementierung aller 36 SAP LMS API Endpunkte
+- ✅ Vollständige OData v4 Unterstützung
+- ✅ Realistische Mock-Daten für alle Services
+- ✅ CORS-Unterstützung für Frontend-Integration
+- ✅ Docker-Unterstützung
+- ✅ Umfassende Dokumentation und Beispiele
+- ✅ SQLAlchemy-Integration für Datenpersistenz
+- ✅ Automatisierte Tests und CI/CD-Pipeline
 
 ---
 
-**Entwickelt mit unterstützung von:** [Manus AI](https://manus.im/share/YghKPlSx6ybOlVYdnJJ7cY?replay=1)  
-**Letzte Aktualisierung:** Juli 2025
-**Version:** 1.0.0
+<div align="center">
 
+**🔧 Entwickelt mit Unterstützung von [Manus AI](https://manus.im)**
+
+**📅 Letzte Aktualisierung:** Juli 2025 | **🏷️ Version:** 1.0.0
+
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
+
+</div>
+```
