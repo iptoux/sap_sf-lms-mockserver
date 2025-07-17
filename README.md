@@ -532,6 +532,6 @@ Für Fragen und Support:
 ---
 
 **Entwickelt mit unterstützung von:** Manus AI  
-**Letzte Aktualisierung:** Januar 2024  
+**Letzte Aktualisierung:** Juli 2025
 **Version:** 1.0.0
 
