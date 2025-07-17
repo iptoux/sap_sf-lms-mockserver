@@ -531,7 +531,7 @@ Für Fragen und Support:
 
 ---
 
-**Entwickelt mit unterstützung von:** Manus AI  
+**Entwickelt mit unterstützung von:** [Manus AI](https://manus.im/share/YghKPlSx6ybOlVYdnJJ7cY?replay=1)  
 **Letzte Aktualisierung:** Juli 2025
 **Version:** 1.0.0
 
