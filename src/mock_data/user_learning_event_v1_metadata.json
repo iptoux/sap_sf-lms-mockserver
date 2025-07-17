@@ -1,0 +1,87 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-learning-event-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "LearningEvents",
+      "Type": "Namespace1_Alias.LearningEvent",
+      "Description": "Collection of learning events for user operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "LearningEvent",
+      "Properties": [
+        {
+          "Name": "eventID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning event"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the learning event"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning event was completed"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status (Pass, Fail, Incomplete)"
+        },
+        {
+          "Name": "totalHours",
+          "Type": "Edm.Double",
+          "Description": "Total hours for the learning event"
+        },
+        {
+          "Name": "instructorName",
+          "Type": "Edm.String",
+          "Description": "Name of the instructor"
+        },
+        {
+          "Name": "comments",
+          "Type": "Edm.String",
+          "Description": "Comments about the learning event"
+        },
+        {
+          "Name": "active",
+          "Type": "Edm.Boolean",
+          "Description": "Whether the user is active"
+        },
+        {
+          "Name": "activeOperator",
+          "Type": "Edm.String",
+          "Description": "Operator for active status filtering"
+        },
+        {
+          "Name": "domainIDs",
+          "Type": "Collection(Edm.String)",
+          "Description": "Security domain IDs of the entity"
+        },
+        {
+          "Name": "domainIDsOperator",
+          "Type": "Edm.String",
+          "Description": "Operator for domain IDs filtering"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

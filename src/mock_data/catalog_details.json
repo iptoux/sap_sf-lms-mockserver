@@ -1,0 +1,45 @@
+{
+  "@odata.context": "$metadata#CatalogsFeed",
+  "value": [
+    {
+      "catalogID": "perf-catalog",
+      "title": "Performance Learning Catalog",
+      "description": "Comprehensive catalog for performance improvement and professional development",
+      "localeID": "English",
+      "status": "Active",
+      "createdDate": "2023-01-15T09:00:00Z",
+      "lastModifiedDate": "2024-01-10T14:30:00Z",
+      "totalCourses": 125,
+      "totalCurricula": 15,
+      "totalPrograms": 8,
+      "totalCollections": 12,
+      "categories": [
+        "Leadership",
+        "Technical Skills",
+        "Compliance",
+        "Soft Skills",
+        "Industry Specific"
+      ],
+      "languages": [
+        "English",
+        "German",
+        "French",
+        "Spanish"
+      ]
+    },
+    {
+      "catalogID": "compliance-catalog",
+      "title": "Compliance Training Catalog",
+      "description": "Mandatory compliance and regulatory training catalog",
+      "localeID": "English",
+      "status": "Active",
+      "createdDate": "2023-02-01T10:00:00Z",
+      "lastModifiedDate": "2024-01-05T16:45:00Z",
+      "totalCourses": 45,
+      "totalCurricula": 8,
+      "totalPrograms": 3,
+      "totalCollections": 5
+    }
+  ]
+}
+

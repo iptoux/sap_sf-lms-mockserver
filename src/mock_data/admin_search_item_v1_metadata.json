@@ -1,0 +1,102 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-search-item-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Items",
+      "Type": "Namespace1_Alias.Item",
+      "Description": "Collection of learning items for administrative search operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Item",
+      "Properties": [
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the learning item"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the learning item"
+        },
+        {
+          "Name": "type",
+          "Type": "Edm.String",
+          "Description": "Type of the learning item"
+        },
+        {
+          "Name": "category",
+          "Type": "Edm.String",
+          "Description": "Category of the learning item"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the learning item"
+        },
+        {
+          "Name": "duration",
+          "Type": "Edm.Double",
+          "Description": "Duration of the learning item in hours"
+        },
+        {
+          "Name": "difficulty",
+          "Type": "Edm.String",
+          "Description": "Difficulty level (Beginner, Intermediate, Advanced)"
+        },
+        {
+          "Name": "language",
+          "Type": "Edm.String",
+          "Description": "Language of the learning item"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning item was created"
+        },
+        {
+          "Name": "lastModifiedDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning item was last modified"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.Int64",
+          "Description": "Completion date in Unix Epoch format"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status (pass, fail, incomplete)"
+        },
+        {
+          "Name": "completedHours",
+          "Type": "Edm.Double",
+          "Description": "Amount of hours completed for the curriculum requirement"
+        },
+        {
+          "Name": "displayOrder",
+          "Type": "Edm.Int64",
+          "Description": "Order that users progress through the learning items within a curriculum"
+        },
+        {
+          "Name": "globalDisplayOrder",
+          "Type": "Edm.String",
+          "Description": "Order that this learning object is displayed in, globally, in the curriculum"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

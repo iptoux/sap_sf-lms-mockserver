@@ -1,0 +1,107 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-learning-history-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "LearningHistories",
+      "Type": "Namespace1_Alias.LearningHistory",
+      "Description": "Collection of learning history records"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "LearningHistory",
+      "Properties": [
+        {
+          "Name": "historyID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning history record"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the completed learning"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning was completed"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status (Pass, Fail, Incomplete)"
+        },
+        {
+          "Name": "score",
+          "Type": "Edm.Double",
+          "Description": "Score achieved"
+        },
+        {
+          "Name": "totalHours",
+          "Type": "Edm.Double",
+          "Description": "Total hours completed"
+        },
+        {
+          "Name": "contactHours",
+          "Type": "Edm.Double",
+          "Description": "Contact hours with instructor"
+        },
+        {
+          "Name": "certificateNumber",
+          "Type": "Edm.String",
+          "Description": "Certificate number if applicable"
+        }
+      ]
+    },
+    {
+      "Name": "Instructor",
+      "Properties": [
+        {
+          "Name": "instructorID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the instructor"
+        },
+        {
+          "Name": "lastName",
+          "Type": "Edm.String",
+          "Description": "Family name of the instructor"
+        },
+        {
+          "Name": "firstName",
+          "Type": "Edm.String",
+          "Description": "Given name of the instructor"
+        },
+        {
+          "Name": "middleInitial",
+          "Type": "Edm.String",
+          "Description": "Middle initial of the instructor"
+        },
+        {
+          "Name": "primary",
+          "Type": "Edm.Boolean",
+          "Description": "Whether this is the primary instructor"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

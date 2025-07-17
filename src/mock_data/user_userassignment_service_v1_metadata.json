@@ -1,0 +1,57 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-userassignment-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "UserPrograms",
+      "Type": "Namespace1_Alias.UserProgram",
+      "Description": "Collection of user program assignments"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "UserProgram",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "programID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the program"
+        },
+        {
+          "Name": "assignmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the program was assigned"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for program completion"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status of the assignment"
+        },
+        {
+          "Name": "assignedBy",
+          "Type": "Edm.String",
+          "Description": "ID of the user who made the assignment"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

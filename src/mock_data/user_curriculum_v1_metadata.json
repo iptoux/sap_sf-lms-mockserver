@@ -1,0 +1,133 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-curriculum-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "CurriculumStatuses",
+      "Type": "Namespace1_Alias.CurriculumStatus",
+      "Description": "Collection of curriculum status search results for users"
+    },
+    {
+      "Name": "CurriculumItemStatuses",
+      "Type": "Namespace1_Alias.CurriculumItemStatus",
+      "Description": "Collection of curriculum item status search results"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "CurriculumStatus",
+      "Properties": [
+        {
+          "Name": "statusID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum status"
+        },
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum"
+        },
+        {
+          "Name": "enrollmentStatus",
+          "Type": "Edm.String",
+          "Description": "Enrollment status in the curriculum"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status of the curriculum"
+        },
+        {
+          "Name": "progressPercentage",
+          "Type": "Edm.Double",
+          "Description": "Progress percentage in the curriculum"
+        },
+        {
+          "Name": "enrollmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when enrolled in the curriculum"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the curriculum was completed"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for curriculum completion"
+        }
+      ]
+    },
+    {
+      "Name": "CurriculumItemStatus",
+      "Properties": [
+        {
+          "Name": "itemStatusID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum item status"
+        },
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the curriculum item"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemTitle",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum item"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status of the curriculum item"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.Int64",
+          "Description": "Date when the curriculum item was completed (Unix timestamp)"
+        },
+        {
+          "Name": "completedHours",
+          "Type": "Edm.Double",
+          "Description": "Amount of hours completed for the curriculum requirement"
+        },
+        {
+          "Name": "displayOrder",
+          "Type": "Edm.Int64",
+          "Description": "Order that users progress through the learning items within a curriculum"
+        },
+        {
+          "Name": "globalDisplayOrder",
+          "Type": "Edm.String",
+          "Description": "Order that this learning object is displayed in, globally, in the curriculum"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

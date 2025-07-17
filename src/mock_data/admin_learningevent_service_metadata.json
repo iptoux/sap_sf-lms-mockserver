@@ -1,0 +1,72 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-learningevent-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "recordLearningEvents",
+      "Type": "Namespace1_Alias.recordLearningEvent",
+      "Description": "Collection of learning events for administrative recording"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "recordLearningEvent",
+      "Properties": [
+        {
+          "Name": "eventID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning event"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning event was completed"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status (Pass, Fail, Incomplete)"
+        },
+        {
+          "Name": "score",
+          "Type": "Edm.Double",
+          "Description": "Score achieved in the learning event"
+        },
+        {
+          "Name": "totalHours",
+          "Type": "Edm.Double",
+          "Description": "Total hours for the learning event"
+        },
+        {
+          "Name": "contactHours",
+          "Type": "Edm.Double",
+          "Description": "Contact hours with instructor"
+        },
+        {
+          "Name": "instructorName",
+          "Type": "Edm.String",
+          "Description": "Name of the instructor"
+        },
+        {
+          "Name": "comments",
+          "Type": "Edm.String",
+          "Description": "Comments about the learning event"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

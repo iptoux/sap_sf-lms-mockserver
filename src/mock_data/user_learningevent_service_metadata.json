@@ -1,0 +1,57 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-learningevent-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "ExternalLearningEvents",
+      "Type": "Namespace1_Alias.ExternalLearningEvent",
+      "Description": "Collection of external learning events for user operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "ExternalLearningEvent",
+      "Properties": [
+        {
+          "Name": "eventID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the external learning event"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the external learning event"
+        },
+        {
+          "Name": "provider",
+          "Type": "Edm.String",
+          "Description": "Provider of the external learning"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the external learning was completed"
+        },
+        {
+          "Name": "certificateNumber",
+          "Type": "Edm.String",
+          "Description": "Certificate number if applicable"
+        },
+        {
+          "Name": "totalHours",
+          "Type": "Edm.Double",
+          "Description": "Total hours for the external learning"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the external learning event"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

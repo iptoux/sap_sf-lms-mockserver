@@ -1,0 +1,62 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"curriculum-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Curricula",
+      "Type": "Namespace1_Alias.Curricula",
+      "Description": "Collection of curriculum entities for administrative operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Curricula",
+      "Properties": [
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the curriculum"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the curriculum (Active, Inactive, Draft)"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the curriculum was created"
+        },
+        {
+          "Name": "lastModifiedDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the curriculum was last modified"
+        },
+        {
+          "Name": "displayOrder",
+          "Type": "Edm.Int64",
+          "Description": "Order that users progress through the learning items within a curriculum"
+        },
+        {
+          "Name": "globalDisplayOrder",
+          "Type": "Edm.String",
+          "Description": "Order that this learning object is displayed in, globally, in the curriculum"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

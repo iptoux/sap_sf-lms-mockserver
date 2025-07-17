@@ -1,0 +1,66 @@
+{
+  "@odata.context": "$metadata#CoursesFeed",
+  "value": [
+    {
+      "courseID": "COURSE_001",
+      "title": "Leadership Fundamentals",
+      "description": "Essential leadership skills for new managers",
+      "category": "Leadership",
+      "difficulty": "Beginner",
+      "duration": 8.0,
+      "language": "English",
+      "status": "Active",
+      "createdDate": "2023-03-15T10:00:00Z",
+      "lastModifiedDate": "2023-12-01T14:30:00Z",
+      "instructorName": "Dr. Sarah Johnson",
+      "format": "Online",
+      "prerequisites": [],
+      "learningObjectives": [
+        "Understand basic leadership principles",
+        "Develop communication skills",
+        "Learn team management techniques"
+      ]
+    },
+    {
+      "courseID": "COURSE_002",
+      "title": "Data Analysis with Python",
+      "description": "Introduction to data analysis using Python programming",
+      "category": "Technical Skills",
+      "difficulty": "Intermediate",
+      "duration": 16.0,
+      "language": "English",
+      "status": "Active",
+      "createdDate": "2023-04-20T09:00:00Z",
+      "lastModifiedDate": "2024-01-08T11:15:00Z",
+      "instructorName": "Prof. Michael Chen",
+      "format": "Blended",
+      "prerequisites": ["Basic Python knowledge"],
+      "learningObjectives": [
+        "Master pandas library",
+        "Create data visualizations",
+        "Perform statistical analysis"
+      ]
+    },
+    {
+      "courseID": "COURSE_003",
+      "title": "Information Security Awareness",
+      "description": "Essential cybersecurity awareness for all employees",
+      "category": "Compliance",
+      "difficulty": "Beginner",
+      "duration": 2.0,
+      "language": "English",
+      "status": "Active",
+      "createdDate": "2023-02-10T08:00:00Z",
+      "lastModifiedDate": "2023-11-15T16:00:00Z",
+      "instructorName": "Security Team",
+      "format": "Online",
+      "prerequisites": [],
+      "learningObjectives": [
+        "Identify security threats",
+        "Follow security protocols",
+        "Report security incidents"
+      ]
+    }
+  ]
+}
+

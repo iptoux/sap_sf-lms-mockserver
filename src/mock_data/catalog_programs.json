@@ -1,0 +1,74 @@
+{
+  "@odata.context": "$metadata#ProgramsFeed",
+  "value": [
+    {
+      "programID": "PROG_001",
+      "title": "Executive Leadership Program",
+      "description": "Comprehensive leadership development program for senior executives",
+      "category": "Leadership",
+      "difficulty": "Advanced",
+      "totalDuration": 120.0,
+      "status": "Active",
+      "createdDate": "2023-01-10T10:00:00Z",
+      "lastModifiedDate": "2023-12-20T15:00:00Z",
+      "language": "English",
+      "format": "Blended",
+      "maxParticipants": 25,
+      "currentEnrollment": 18,
+      "startDate": "2024-03-01T09:00:00Z",
+      "endDate": "2024-08-30T17:00:00Z",
+      "curricula": [
+        {
+          "curriculumID": "CURR_001",
+          "title": "Management Development Program",
+          "duration": 40.0
+        },
+        {
+          "curriculumID": "CURR_003",
+          "title": "Strategic Leadership",
+          "duration": 50.0
+        },
+        {
+          "curriculumID": "CURR_004",
+          "title": "Executive Communication",
+          "duration": 30.0
+        }
+      ]
+    },
+    {
+      "programID": "PROG_002",
+      "title": "Digital Transformation Certificate",
+      "description": "Comprehensive program covering digital transformation strategies and technologies",
+      "category": "Technical Skills",
+      "difficulty": "Intermediate",
+      "totalDuration": 60.0,
+      "status": "Active",
+      "createdDate": "2023-05-15T11:00:00Z",
+      "lastModifiedDate": "2024-01-05T13:45:00Z",
+      "language": "English",
+      "format": "Online",
+      "maxParticipants": 50,
+      "currentEnrollment": 32,
+      "startDate": "2024-02-15T09:00:00Z",
+      "endDate": "2024-06-15T17:00:00Z",
+      "curricula": [
+        {
+          "curriculumID": "CURR_002",
+          "title": "Data Science Certification",
+          "duration": 80.0
+        },
+        {
+          "curriculumID": "CURR_005",
+          "title": "Cloud Computing Fundamentals",
+          "duration": 25.0
+        },
+        {
+          "curriculumID": "CURR_006",
+          "title": "Agile Methodologies",
+          "duration": 15.0
+        }
+      ]
+    }
+  ]
+}
+

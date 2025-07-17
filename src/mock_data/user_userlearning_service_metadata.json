@@ -1,0 +1,93 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-userlearning-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "LearningHistories",
+      "Type": "Namespace1_Alias.LearningHistories",
+      "Description": "Collection of learning history records"
+    },
+    {
+      "Name": "learninghistorys",
+      "Type": "Namespace1_Alias.learninghistory",
+      "Description": "Individual learning history records"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "LearningHistories",
+      "Properties": [
+        {
+          "Name": "historyID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning history record"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the course was completed"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status (Pass, Fail, Incomplete)"
+        },
+        {
+          "Name": "score",
+          "Type": "Edm.Double",
+          "Description": "Score achieved"
+        },
+        {
+          "Name": "totalHours",
+          "Type": "Edm.Double",
+          "Description": "Total hours completed"
+        }
+      ]
+    },
+    {
+      "Name": "learninghistory",
+      "Properties": [
+        {
+          "Name": "historyID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning history record"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "completionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the item was completed"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

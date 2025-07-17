@@ -1,0 +1,62 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-curriculum-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Curricula",
+      "Type": "Namespace1_Alias.Curricula",
+      "Description": "Collection of curriculum entities for user operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Curricula",
+      "Properties": [
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the curriculum"
+        },
+        {
+          "Name": "enrollmentStatus",
+          "Type": "Edm.String",
+          "Description": "User's enrollment status in the curriculum"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "User's completion status for the curriculum"
+        },
+        {
+          "Name": "progressPercentage",
+          "Type": "Edm.Double",
+          "Description": "User's progress percentage in the curriculum"
+        },
+        {
+          "Name": "displayOrder",
+          "Type": "Edm.Int64",
+          "Description": "Order that users progress through the learning items within a curriculum"
+        },
+        {
+          "Name": "globalDisplayOrder",
+          "Type": "Edm.String",
+          "Description": "Order that this learning object is displayed in, globally, in the curriculum"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

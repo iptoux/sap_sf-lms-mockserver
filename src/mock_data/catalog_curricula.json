@@ -1,0 +1,106 @@
+{
+  "@odata.context": "$metadata#CurriculaFeed",
+  "value": [
+    {
+      "curriculumID": "CURR_001",
+      "title": "Management Development Program",
+      "description": "Comprehensive management development curriculum for emerging leaders",
+      "category": "Leadership",
+      "difficulty": "Intermediate",
+      "totalDuration": 40.0,
+      "totalItems": 5,
+      "status": "Active",
+      "createdDate": "2023-01-20T10:00:00Z",
+      "lastModifiedDate": "2023-12-15T14:00:00Z",
+      "language": "English",
+      "items": [
+        {
+          "itemID": "COURSE_001",
+          "title": "Leadership Fundamentals",
+          "type": "Course",
+          "duration": 8.0,
+          "displayOrder": 1
+        },
+        {
+          "itemID": "COURSE_004",
+          "title": "Strategic Thinking",
+          "type": "Course",
+          "duration": 12.0,
+          "displayOrder": 2
+        },
+        {
+          "itemID": "COURSE_005",
+          "title": "Team Building",
+          "type": "Course",
+          "duration": 6.0,
+          "displayOrder": 3
+        },
+        {
+          "itemID": "COURSE_006",
+          "title": "Performance Management",
+          "type": "Course",
+          "duration": 10.0,
+          "displayOrder": 4
+        },
+        {
+          "itemID": "COURSE_007",
+          "title": "Change Management",
+          "type": "Course",
+          "duration": 4.0,
+          "displayOrder": 5
+        }
+      ]
+    },
+    {
+      "curriculumID": "CURR_002",
+      "title": "Data Science Certification",
+      "description": "Complete data science learning path from beginner to advanced",
+      "category": "Technical Skills",
+      "difficulty": "Advanced",
+      "totalDuration": 80.0,
+      "totalItems": 8,
+      "status": "Active",
+      "createdDate": "2023-03-01T09:00:00Z",
+      "lastModifiedDate": "2024-01-10T12:30:00Z",
+      "language": "English",
+      "items": [
+        {
+          "itemID": "COURSE_002",
+          "title": "Data Analysis with Python",
+          "type": "Course",
+          "duration": 16.0,
+          "displayOrder": 1
+        },
+        {
+          "itemID": "COURSE_008",
+          "title": "Machine Learning Basics",
+          "type": "Course",
+          "duration": 20.0,
+          "displayOrder": 2
+        },
+        {
+          "itemID": "COURSE_009",
+          "title": "Deep Learning",
+          "type": "Course",
+          "duration": 24.0,
+          "displayOrder": 3
+        },
+        {
+          "itemID": "COURSE_010",
+          "title": "Data Visualization",
+          "type": "Course",
+          "duration": 8.0,
+          "displayOrder": 4
+        },
+        {
+          "itemID": "COURSE_011",
+          "title": "Big Data Technologies",
+          "type": "Course",
+          "duration": 12.0,
+          "displayOrder": 5
+        }
+      ]
+    }
+  ]
+}
+

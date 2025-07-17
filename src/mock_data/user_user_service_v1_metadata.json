@@ -1,0 +1,110 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-user-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Approvals",
+      "Type": "Namespace1_Alias.Approval",
+      "Description": "Collection of approval information for users"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Approval",
+      "Properties": [
+        {
+          "Name": "approvalID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the approval"
+        },
+        {
+          "Name": "requestID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the request"
+        },
+        {
+          "Name": "requestType",
+          "Type": "Edm.String",
+          "Description": "Type of request (Course Enrollment, Program Assignment, etc.)"
+        },
+        {
+          "Name": "requestedBy",
+          "Type": "Edm.String",
+          "Description": "User who made the request"
+        },
+        {
+          "Name": "approverID",
+          "Type": "Edm.String",
+          "Description": "User who needs to approve the request"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the approval (Pending, Approved, Rejected)"
+        },
+        {
+          "Name": "requestDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the request was made"
+        },
+        {
+          "Name": "approvalDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the approval was given"
+        },
+        {
+          "Name": "comments",
+          "Type": "Edm.String",
+          "Description": "Comments from the approver"
+        }
+      ]
+    },
+    {
+      "Name": "AlternateSupervisor",
+      "Properties": [
+        {
+          "Name": "supervisorID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the alternate supervisor"
+        },
+        {
+          "Name": "name",
+          "Type": "Edm.String",
+          "Description": "Name of the alternate supervisor"
+        }
+      ]
+    }
+  ],
+  "Actions": [
+    {
+      "Name": "mergeUser",
+      "IsBound": false,
+      "ReturnType": "Namespace1_Alias.MergeUser",
+      "Parameters": [
+        {
+          "Name": "fromUserID",
+          "Type": "Edm.String",
+          "Description": "User ID that will be deactivated and have its content merged"
+        },
+        {
+          "Name": "toUserID",
+          "Type": "Edm.String",
+          "Description": "User ID that will receive the data from the other user"
+        },
+        {
+          "Name": "fromPersonGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID that will be deactivated and have its content merged"
+        },
+        {
+          "Name": "toPersonGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID that will receive the data from the other user"
+        }
+      ]
+    }
+  ],
+  "Functions": []
+}
+

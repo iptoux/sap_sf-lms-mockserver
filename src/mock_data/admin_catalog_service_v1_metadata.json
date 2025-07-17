@@ -1,0 +1,99 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-catalog-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "CatalogsFeed",
+      "Type": "Namespace1_Alias.Catalog",
+      "Description": "Collection of catalogs for administrative operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Catalog",
+      "Properties": [
+        {
+          "Name": "catalogID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the catalog"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the catalog"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the catalog"
+        },
+        {
+          "Name": "localeID",
+          "Type": "Edm.String",
+          "Description": "Locale identifier for the catalog"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the catalog"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the catalog was created"
+        },
+        {
+          "Name": "lastModifiedDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the catalog was last modified"
+        },
+        {
+          "Name": "totalCourses",
+          "Type": "Edm.Int32",
+          "Description": "Total number of courses in the catalog"
+        },
+        {
+          "Name": "totalCurricula",
+          "Type": "Edm.Int32",
+          "Description": "Total number of curricula in the catalog"
+        },
+        {
+          "Name": "totalPrograms",
+          "Type": "Edm.Int32",
+          "Description": "Total number of programs in the catalog"
+        },
+        {
+          "Name": "totalCollections",
+          "Type": "Edm.Int32",
+          "Description": "Total number of collections in the catalog"
+        }
+      ]
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Name": "CoursesFeed",
+      "Type": "Collection(Namespace1_Alias.Course)",
+      "Description": "Navigation to courses in the catalog"
+    },
+    {
+      "Name": "CurriculaFeed",
+      "Type": "Collection(Namespace1_Alias.Curriculum)",
+      "Description": "Navigation to curricula in the catalog"
+    },
+    {
+      "Name": "ProgramsFeed",
+      "Type": "Collection(Namespace1_Alias.Program)",
+      "Description": "Navigation to programs in the catalog"
+    },
+    {
+      "Name": "CollectionsFeed",
+      "Type": "Collection(Namespace1_Alias.Collection)",
+      "Description": "Navigation to collections in the catalog"
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

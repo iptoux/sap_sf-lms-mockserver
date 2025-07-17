@@ -1,0 +1,72 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-learning-plan-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "LearningPlans",
+      "Type": "Namespace1_Alias.LearningPlan",
+      "Description": "Collection of learning plans with search parameters"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "LearningPlan",
+      "Properties": [
+        {
+          "Name": "planID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning plan"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the learning plan"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the learning plan"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the learning plan was created"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for plan completion"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Overall completion status of the plan"
+        },
+        {
+          "Name": "progressPercentage",
+          "Type": "Edm.Double",
+          "Description": "Progress percentage of the plan"
+        },
+        {
+          "Name": "totalItems",
+          "Type": "Edm.Int32",
+          "Description": "Total number of items in the plan"
+        },
+        {
+          "Name": "completedItems",
+          "Type": "Edm.Int32",
+          "Description": "Number of completed items in the plan"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

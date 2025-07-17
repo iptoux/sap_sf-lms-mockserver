@@ -1,0 +1,62 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-user-service-v2-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "UserAssignments",
+      "Type": "Namespace1_Alias.UserAssignment",
+      "Description": "Collection of user assignments for item assignment and user information updates"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "UserAssignment",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "assignmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the item was assigned"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for item completion"
+        },
+        {
+          "Name": "label",
+          "Type": "Edm.String",
+          "Description": "Label that appears for approvers to know which choice they are making"
+        },
+        {
+          "Name": "comment_required",
+          "Type": "Edm.String",
+          "Description": "Whether approver is required to enter a comment when making this choice"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the assignment"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

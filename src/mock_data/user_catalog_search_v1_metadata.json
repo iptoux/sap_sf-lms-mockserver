@@ -1,0 +1,72 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-catalog-search-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "CatalogItems",
+      "Type": "Namespace1_Alias.CatalogItem",
+      "Description": "Collection of catalog items for user search operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "CatalogItem",
+      "Properties": [
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the catalog item"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the catalog item"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the catalog item"
+        },
+        {
+          "Name": "type",
+          "Type": "Edm.String",
+          "Description": "Type of the catalog item (Course, Curriculum, Program)"
+        },
+        {
+          "Name": "category",
+          "Type": "Edm.String",
+          "Description": "Category of the catalog item"
+        },
+        {
+          "Name": "duration",
+          "Type": "Edm.Double",
+          "Description": "Duration of the catalog item in hours"
+        },
+        {
+          "Name": "difficulty",
+          "Type": "Edm.String",
+          "Description": "Difficulty level (Beginner, Intermediate, Advanced)"
+        },
+        {
+          "Name": "enrollmentStatus",
+          "Type": "Edm.String",
+          "Description": "User's enrollment status for this item"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "User's completion status for this item"
+        },
+        {
+          "Name": "available",
+          "Type": "Edm.Boolean",
+          "Description": "Whether the item is available for enrollment"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

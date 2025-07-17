@@ -1,0 +1,153 @@
+{
+  "@odata.context": "$metadata#CollectionsFeed",
+  "value": [
+    {
+      "collectionID": "COLL_001",
+      "title": "New Employee Onboarding",
+      "description": "Essential training collection for new hires",
+      "category": "Onboarding",
+      "status": "Active",
+      "createdDate": "2023-01-05T08:00:00Z",
+      "lastModifiedDate": "2023-11-30T16:30:00Z",
+      "language": "English",
+      "totalItems": 6,
+      "estimatedDuration": 12.0,
+      "items": [
+        {
+          "itemID": "COURSE_012",
+          "title": "Company Overview",
+          "type": "Course",
+          "duration": 2.0,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_013",
+          "title": "HR Policies and Procedures",
+          "type": "Course",
+          "duration": 3.0,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_003",
+          "title": "Information Security Awareness",
+          "type": "Course",
+          "duration": 2.0,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_014",
+          "title": "Workplace Safety",
+          "type": "Course",
+          "duration": 1.5,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_015",
+          "title": "Communication Tools Training",
+          "type": "Course",
+          "duration": 2.5,
+          "mandatory": false
+        },
+        {
+          "itemID": "COURSE_016",
+          "title": "Team Introduction",
+          "type": "Course",
+          "duration": 1.0,
+          "mandatory": false
+        }
+      ]
+    },
+    {
+      "collectionID": "COLL_002",
+      "title": "Compliance Essentials",
+      "description": "Core compliance training for all employees",
+      "category": "Compliance",
+      "status": "Active",
+      "createdDate": "2023-02-01T09:00:00Z",
+      "lastModifiedDate": "2023-12-10T14:00:00Z",
+      "language": "English",
+      "totalItems": 4,
+      "estimatedDuration": 8.0,
+      "items": [
+        {
+          "itemID": "COURSE_003",
+          "title": "Information Security Awareness",
+          "type": "Course",
+          "duration": 2.0,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_017",
+          "title": "Data Privacy and GDPR",
+          "type": "Course",
+          "duration": 2.5,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_018",
+          "title": "Anti-Harassment Training",
+          "type": "Course",
+          "duration": 2.0,
+          "mandatory": true
+        },
+        {
+          "itemID": "COURSE_019",
+          "title": "Code of Conduct",
+          "type": "Course",
+          "duration": 1.5,
+          "mandatory": true
+        }
+      ]
+    },
+    {
+      "collectionID": "COLL_003",
+      "title": "Soft Skills Development",
+      "description": "Essential soft skills for professional development",
+      "category": "Soft Skills",
+      "status": "Active",
+      "createdDate": "2023-04-10T10:30:00Z",
+      "lastModifiedDate": "2024-01-08T11:45:00Z",
+      "language": "English",
+      "totalItems": 5,
+      "estimatedDuration": 20.0,
+      "items": [
+        {
+          "itemID": "COURSE_020",
+          "title": "Effective Communication",
+          "type": "Course",
+          "duration": 4.0,
+          "mandatory": false
+        },
+        {
+          "itemID": "COURSE_021",
+          "title": "Time Management",
+          "type": "Course",
+          "duration": 3.0,
+          "mandatory": false
+        },
+        {
+          "itemID": "COURSE_022",
+          "title": "Problem Solving",
+          "type": "Course",
+          "duration": 5.0,
+          "mandatory": false
+        },
+        {
+          "itemID": "COURSE_023",
+          "title": "Emotional Intelligence",
+          "type": "Course",
+          "duration": 4.0,
+          "mandatory": false
+        },
+        {
+          "itemID": "COURSE_024",
+          "title": "Conflict Resolution",
+          "type": "Course",
+          "duration": 4.0,
+          "mandatory": false
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,87 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-scheduledoffering-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "ScheduledOfferings",
+      "Type": "Namespace1_Alias.ScheduledOffering",
+      "Description": "Collection of scheduled course offerings for user operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "ScheduledOffering",
+      "Properties": [
+        {
+          "Name": "offeringID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the scheduled offering"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the scheduled offering"
+        },
+        {
+          "Name": "startDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Start date and time of the offering"
+        },
+        {
+          "Name": "endDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "End date and time of the offering"
+        },
+        {
+          "Name": "location",
+          "Type": "Edm.String",
+          "Description": "Location where the offering takes place"
+        },
+        {
+          "Name": "enrollmentStatus",
+          "Type": "Edm.String",
+          "Description": "User's enrollment status for this offering"
+        },
+        {
+          "Name": "attendanceStatus",
+          "Type": "Edm.String",
+          "Description": "User's attendance status"
+        }
+      ]
+    },
+    {
+      "Name": "sttcCriteria",
+      "Properties": [
+        {
+          "Name": "instructorID",
+          "Type": "Edm.String",
+          "Description": "Instructor ID for filtering"
+        },
+        {
+          "Name": "fromDate",
+          "Type": "Edm.Int64",
+          "Description": "Start date for filtering (Unix timestamp)"
+        },
+        {
+          "Name": "toDate",
+          "Type": "Edm.Int64",
+          "Description": "End date for filtering (Unix timestamp)"
+        },
+        {
+          "Name": "segmentsExpanded",
+          "Type": "Edm.Boolean",
+          "Description": "Whether segments are expanded"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

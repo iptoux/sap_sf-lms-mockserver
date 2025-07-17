@@ -1,0 +1,72 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-user-service-v1-metadata-alt\"",
+  "EntitySets": [
+    {
+      "Name": "ItemAssignments",
+      "Type": "Namespace1_Alias.ItemAssignment",
+      "Description": "Collection of learning item assignments for administrative operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "ItemAssignment",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user in the LMS"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "componentTypeID",
+          "Type": "Edm.String",
+          "Description": "Item type ID that determines completion statuses"
+        },
+        {
+          "Name": "revisionDate",
+          "Type": "Edm.Int64",
+          "Description": "Revision date of the assignment"
+        },
+        {
+          "Name": "assignmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the item was assigned"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for item completion"
+        },
+        {
+          "Name": "assignedBy",
+          "Type": "Edm.String",
+          "Description": "Administrator who made the assignment"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status of the assignment"
+        },
+        {
+          "Name": "priority",
+          "Type": "Edm.String",
+          "Description": "Priority level of the assignment"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

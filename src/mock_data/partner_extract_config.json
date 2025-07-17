@@ -1,0 +1,19 @@
+{
+  "sftpPath": "/customer/subfolder/path",
+  "partnerID": "PARTNER001",
+  "enabled": true,
+  "email": "partner@example.com",
+  "keyOwner": "SAP_LMS_ADMIN",
+  "encryptionKey": "AES256_ENCRYPTION_KEY_PLACEHOLDER",
+  "lastExtractDate": "2024-01-15T10:30:00Z",
+  "extractFrequency": "DAILY",
+  "configuration": {
+    "includeUserData": true,
+    "includeCourseData": true,
+    "includeCurriculumData": true,
+    "includeCompletionData": true,
+    "dataFormat": "JSON",
+    "compression": "GZIP"
+  }
+}
+

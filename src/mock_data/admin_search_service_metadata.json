@@ -1,0 +1,114 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-search-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Programs",
+      "Type": "Namespace1_Alias.Program",
+      "Description": "Collection of learning programs"
+    },
+    {
+      "Name": "Students",
+      "Type": "Namespace1_Alias.Student",
+      "Description": "Collection of students/users"
+    },
+    {
+      "Name": "Items",
+      "Type": "Namespace1_Alias.Item",
+      "Description": "Collection of learning items"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Program",
+      "Properties": [
+        {
+          "Name": "programID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the program"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the program"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the program"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the program"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the program was created"
+        }
+      ]
+    },
+    {
+      "Name": "Student",
+      "Properties": [
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the student"
+        },
+        {
+          "Name": "firstName",
+          "Type": "Edm.String",
+          "Description": "First name of the student"
+        },
+        {
+          "Name": "lastName",
+          "Type": "Edm.String",
+          "Description": "Last name of the student"
+        },
+        {
+          "Name": "email",
+          "Type": "Edm.String",
+          "Description": "Email address of the student"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the student account"
+        }
+      ]
+    },
+    {
+      "Name": "Item",
+      "Properties": [
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the learning item"
+        },
+        {
+          "Name": "type",
+          "Type": "Edm.String",
+          "Description": "Type of the learning item"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the learning item"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

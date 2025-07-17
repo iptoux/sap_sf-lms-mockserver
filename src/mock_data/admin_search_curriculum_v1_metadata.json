@@ -1,0 +1,82 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-search-curriculum-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Curricula",
+      "Type": "Namespace1_Alias.Curriculum",
+      "Description": "Collection of curricula for administrative search operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Curriculum",
+      "Properties": [
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the curriculum"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the curriculum (Active, Inactive, Draft)"
+        },
+        {
+          "Name": "category",
+          "Type": "Edm.String",
+          "Description": "Category of the curriculum"
+        },
+        {
+          "Name": "difficulty",
+          "Type": "Edm.String",
+          "Description": "Difficulty level (Beginner, Intermediate, Advanced)"
+        },
+        {
+          "Name": "totalDuration",
+          "Type": "Edm.Double",
+          "Description": "Total duration of the curriculum in hours"
+        },
+        {
+          "Name": "totalItems",
+          "Type": "Edm.Int32",
+          "Description": "Total number of items in the curriculum"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the curriculum was created"
+        },
+        {
+          "Name": "lastModifiedDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the curriculum was last modified"
+        },
+        {
+          "Name": "createdBy",
+          "Type": "Edm.String",
+          "Description": "User who created the curriculum"
+        },
+        {
+          "Name": "language",
+          "Type": "Edm.String",
+          "Description": "Language of the curriculum"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+

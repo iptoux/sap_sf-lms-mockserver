@@ -1,0 +1,97 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-scheduledoffering-service-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "ScheduledOfferings",
+      "Type": "Namespace1_Alias.ScheduledOffering",
+      "Description": "Collection of scheduled course offerings for administrative operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "ScheduledOffering",
+      "Properties": [
+        {
+          "Name": "offeringID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the scheduled offering"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the scheduled offering"
+        },
+        {
+          "Name": "startDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Start date and time of the offering"
+        },
+        {
+          "Name": "endDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "End date and time of the offering"
+        },
+        {
+          "Name": "location",
+          "Type": "Edm.String",
+          "Description": "Location where the offering takes place"
+        },
+        {
+          "Name": "maxEnrollment",
+          "Type": "Edm.Int32",
+          "Description": "Maximum number of enrollments allowed"
+        },
+        {
+          "Name": "currentEnrollment",
+          "Type": "Edm.Int32",
+          "Description": "Current number of enrolled participants"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the offering (Scheduled, In Progress, Completed, Cancelled)"
+        }
+      ]
+    },
+    {
+      "Name": "Instructor",
+      "Properties": [
+        {
+          "Name": "instructorID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the instructor"
+        },
+        {
+          "Name": "lastName",
+          "Type": "Edm.String",
+          "Description": "Family name of the instructor"
+        },
+        {
+          "Name": "firstName",
+          "Type": "Edm.String",
+          "Description": "Given name of the instructor"
+        },
+        {
+          "Name": "middleInitial",
+          "Type": "Edm.String",
+          "Description": "Middle initial of the instructor"
+        },
+        {
+          "Name": "primary",
+          "Type": "Edm.Boolean",
+          "Description": "Whether this is the primary instructor"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

@@ -1,0 +1,92 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-financial-transactions-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "FinancialTransactions",
+      "Type": "Namespace1_Alias.FinancialTransaction",
+      "Description": "Collection of financial transactions for administrative operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "FinancialTransaction",
+      "Properties": [
+        {
+          "Name": "transactionID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique ID of the financial transaction"
+        },
+        {
+          "Name": "orderNo",
+          "Type": "Edm.String",
+          "Description": "Order number of the transaction"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "courseID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the course"
+        },
+        {
+          "Name": "amount",
+          "Type": "Edm.Decimal",
+          "Description": "Transaction amount"
+        },
+        {
+          "Name": "currency",
+          "Type": "Edm.String",
+          "Description": "Currency code (USD, EUR, etc.)"
+        },
+        {
+          "Name": "transactionType",
+          "Type": "Edm.String",
+          "Description": "Type of transaction (Purchase, Refund, Credit)"
+        },
+        {
+          "Name": "transactionDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the transaction occurred"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the transaction (Pending, Completed, Failed, Cancelled)"
+        },
+        {
+          "Name": "paymentMethod",
+          "Type": "Edm.String",
+          "Description": "Payment method used (Credit Card, Bank Transfer, etc.)"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the transaction"
+        },
+        {
+          "Name": "externalTransactionID",
+          "Type": "Edm.String",
+          "Description": "External system transaction ID"
+        }
+      ]
+    }
+  ],
+  "SearchProperties": [
+    {
+      "Name": "transactionID",
+      "Description": "Unique ID of the financial transaction. You can see the ID in the ID column in Commerce Financial Transactions."
+    },
+    {
+      "Name": "orderNo",
+      "Description": "Order number of the transaction. Orders are part of the purchasing process. Each order follows a process from submitted to complete."
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

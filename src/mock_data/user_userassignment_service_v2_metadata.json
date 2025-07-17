@@ -1,0 +1,88 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-userassignment-service-v2-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "itemAssignments",
+      "Type": "Namespace1_Alias.itemAssignment",
+      "Description": "Set of assignments that you want to make to users"
+    },
+    {
+      "Name": "removeItemAssignments",
+      "Type": "Namespace1_Alias.removeItemAssignment",
+      "Description": "Set of assignments that you want to remove from users"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "itemAssignment",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "assignmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the item was assigned"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for item completion"
+        },
+        {
+          "Name": "assignedBy",
+          "Type": "Edm.String",
+          "Description": "ID of the user who made the assignment"
+        },
+        {
+          "Name": "priority",
+          "Type": "Edm.String",
+          "Description": "Priority level of the assignment"
+        }
+      ]
+    },
+    {
+      "Name": "removeItemAssignment",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment to remove"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "removalReason",
+          "Type": "Edm.String",
+          "Description": "Reason for removing the assignment"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

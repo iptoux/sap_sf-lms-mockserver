@@ -1,0 +1,108 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-user-service-v2-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "MergeUsers",
+      "Type": "Namespace1_Alias.MergeUser",
+      "Description": "Set of user merge operations for administrators"
+    },
+    {
+      "Name": "Users",
+      "Type": "Namespace1_Alias.User",
+      "Description": "Set of user management operations for administrators"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "MergeUser",
+      "Properties": [
+        {
+          "Name": "mergeID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the merge operation"
+        },
+        {
+          "Name": "fromUserID",
+          "Type": "Edm.String",
+          "Description": "User ID that will be deactivated and have its content merged"
+        },
+        {
+          "Name": "toUserID",
+          "Type": "Edm.String",
+          "Description": "User ID that will receive the data from the other user"
+        },
+        {
+          "Name": "fromPersonGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID that will be deactivated and have its content merged"
+        },
+        {
+          "Name": "toPersonGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID that will receive the data from the other user"
+        },
+        {
+          "Name": "mergeDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the merge operation was performed"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the merge operation"
+        }
+      ]
+    },
+    {
+      "Name": "User",
+      "Properties": [
+        {
+          "Name": "userID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the user"
+        },
+        {
+          "Name": "personGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID for the user"
+        },
+        {
+          "Name": "firstName",
+          "Type": "Edm.String",
+          "Description": "First name of the user"
+        },
+        {
+          "Name": "lastName",
+          "Type": "Edm.String",
+          "Description": "Last name of the user"
+        },
+        {
+          "Name": "email",
+          "Type": "Edm.String",
+          "Description": "Email address of the user"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the user account"
+        },
+        {
+          "Name": "createdDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the user was created"
+        },
+        {
+          "Name": "lastModifiedDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the user was last modified"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

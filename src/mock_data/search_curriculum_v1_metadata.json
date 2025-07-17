@@ -1,0 +1,92 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"search-curriculum-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Curricula",
+      "Type": "Namespace1_Alias.Curriculum",
+      "Description": "Collection of curricula for search operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Curriculum",
+      "Properties": [
+        {
+          "Name": "curriculumID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the curriculum"
+        },
+        {
+          "Name": "title",
+          "Type": "Edm.String",
+          "Description": "Title of the curriculum"
+        },
+        {
+          "Name": "description",
+          "Type": "Edm.String",
+          "Description": "Description of the curriculum"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the curriculum"
+        },
+        {
+          "Name": "category",
+          "Type": "Edm.String",
+          "Description": "Category of the curriculum"
+        },
+        {
+          "Name": "difficulty",
+          "Type": "Edm.String",
+          "Description": "Difficulty level"
+        },
+        {
+          "Name": "totalDuration",
+          "Type": "Edm.Double",
+          "Description": "Total duration of the curriculum in hours"
+        },
+        {
+          "Name": "totalItems",
+          "Type": "Edm.Int32",
+          "Description": "Total number of items in the curriculum"
+        },
+        {
+          "Name": "available",
+          "Type": "Edm.Boolean",
+          "Description": "Whether the curriculum is available for enrollment"
+        },
+        {
+          "Name": "enrollmentStatus",
+          "Type": "Edm.String",
+          "Description": "User's enrollment status for this curriculum"
+        },
+        {
+          "Name": "active",
+          "Type": "Edm.Boolean",
+          "Description": "Whether the user is active"
+        },
+        {
+          "Name": "activeOperator",
+          "Type": "Edm.String",
+          "Description": "Operator for active status filtering"
+        },
+        {
+          "Name": "domainIDs",
+          "Type": "Collection(Edm.String)",
+          "Description": "Security domain IDs of the entity"
+        },
+        {
+          "Name": "domainIDsOperator",
+          "Type": "Edm.String",
+          "Description": "Operator for domain IDs filtering"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

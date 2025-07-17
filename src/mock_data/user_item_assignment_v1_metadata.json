@@ -1,0 +1,67 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"user-item-assignment-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "ItemAssignments",
+      "Type": "Namespace1_Alias.ItemAssignment",
+      "Description": "Collection of learning item assignments for user operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "ItemAssignment",
+      "Properties": [
+        {
+          "Name": "assignmentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the assignment"
+        },
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Description": "Unique ID of the student/user"
+        },
+        {
+          "Name": "itemID",
+          "Type": "Edm.String",
+          "Description": "Unique identifier for the learning item"
+        },
+        {
+          "Name": "assignmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the item was assigned"
+        },
+        {
+          "Name": "dueDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Due date for item completion"
+        },
+        {
+          "Name": "assignedBy",
+          "Type": "Edm.String",
+          "Description": "User or supervisor who made the assignment"
+        },
+        {
+          "Name": "completionStatus",
+          "Type": "Edm.String",
+          "Description": "Completion status of the assignment"
+        },
+        {
+          "Name": "priority",
+          "Type": "Edm.String",
+          "Description": "Priority level of the assignment"
+        },
+        {
+          "Name": "comments",
+          "Type": "Edm.String",
+          "Description": "Comments about the assignment"
+        }
+      ]
+    }
+  ],
+  "Actions": [],
+  "Functions": []
+}
+

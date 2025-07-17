@@ -1,0 +1,77 @@
+{
+  "@odata.context": "$metadata",
+  "@odata.metadataEtag": "W/\"admin-search-student-v1-metadata\"",
+  "EntitySets": [
+    {
+      "Name": "Students",
+      "Type": "Namespace1_Alias.Student",
+      "Description": "Collection of students for administrative search operations"
+    }
+  ],
+  "EntityTypes": [
+    {
+      "Name": "Student",
+      "Properties": [
+        {
+          "Name": "studentID",
+          "Type": "Edm.String",
+          "Nullable": false,
+          "Description": "Unique identifier for the student"
+        },
+        {
+          "Name": "personGUID",
+          "Type": "Edm.String",
+          "Description": "Person GUID for the student"
+        },
+        {
+          "Name": "firstName",
+          "Type": "Edm.String",
+          "Description": "First name of the student"
+        },
+        {
+          "Name": "lastName",
+          "Type": "Edm.String",
+          "Description": "Last name of the student"
+        },
+        {
+          "Name": "email",
+          "Type": "Edm.String",
+          "Description": "Email address of the student"
+        },
+        {
+          "Name": "department",
+          "Type": "Edm.String",
+          "Description": "Department of the student"
+        },
+        {
+          "Name": "jobTitle",
+          "Type": "Edm.String",
+          "Description": "Job title of the student"
+        },
+        {
+          "Name": "status",
+          "Type": "Edm.String",
+          "Description": "Status of the student account"
+        },
+        {
+          "Name": "enrollmentDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date when the student was enrolled"
+        },
+        {
+          "Name": "lastLoginDate",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Date of the student's last login"
+        },
+        {
+          "Name": "competencyAssessmentDateTimeOffset",
+          "Type": "Edm.DateTimeOffset",
+          "Description": "Assessment date for competency"
+        }
+      ]
+    }
+  ],
+  "ActionImport": [],
+  "NavigationPropertyBindings": []
+}
+
