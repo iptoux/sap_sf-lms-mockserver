@@ -1,8 +1,8 @@
 # SAP SuccessFactors LMS MockServer - API Dokumentation
 
 **Version:** 1.0.0  
-**Letzte Aktualisierung:** Januar 2024  
-**Entwickelt von:** Manus AI  
+**Letzte Aktualisierung:** Juli 2025  
+**Entwickelt mit Unterstützung durch:** Manus AI  
 
 ---
 ## Inhaltsverzeichnis
