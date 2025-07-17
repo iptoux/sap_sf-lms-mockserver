@@ -3,7 +3,7 @@
 
 **📅 Letzte Aktualisierung:** Juli 2025 | **🏷️ Version:** 1.0.0
 
-[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](Dockerfile)
@@ -64,7 +64,7 @@ Der SAP SuccessFactors LMS MockServer ist eine vollständige Implementierung ein
 - **Flask-CORS** - Cross-Origin Resource Sharing
 - **SQLAlchemy** - Database ORM
 - **JSON** - Mock-Daten-Storage
-- **Python 3.12** - Runtime Environment
+- **Python 3.13** - Runtime Environment
 
 ### Projektstruktur
 ```
@@ -95,7 +95,7 @@ sap-lms-mockserver/
 ## Installation
 
 ### Voraussetzungen
-- Python 3.12 oder höher
+- Python 3.13 oder höher
 - pip (Python Package Manager)
 - Git (für Klonen des Repositories)
 
