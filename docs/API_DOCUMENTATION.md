@@ -1,43 +1,32 @@
 # SAP SuccessFactors LMS MockServer - API Dokumentation
 
-## Inhaltsverzeichnis
+**Version:** 1.0.0  
+**Letzte Aktualisierung:** Januar 2024  
+**Entwickelt von:** Manus AI  
 
-1. [Übersicht](#übersicht)
-2. [Authentifizierung](#authentifizierung)
-3. [REST API Endpunkte](#rest-api-endpunkte)
-4. [OData v4 Services](#odata-v4-services)
-5. [Datenmodelle](#datenmodelle)
-6. [Fehlerbehandlung](#fehlerbehandlung)
-7. [Beispiele](#beispiele)
+---
 
-## Übersicht
+## 1. Übersicht
 
-Diese Dokumentation beschreibt alle verfügbaren API-Endpunkte des SAP SuccessFactors LMS MockServers. Der Server emuliert die vollständige SAP SuccessFactors Learning Management System API mit realistischen Mock-Daten.
+Diese Dokumentation beschreibt alle verfügbaren API-Endpunkte des SAP SuccessFactors LMS MockServers. Der Server emuliert die vollständige SAP SuccessFactors Learning Management System API mit realistischen Mock-Daten und ermöglicht so eine effiziente Entwicklung und Integration.
 
-**Basis-URL:** `http://localhost:5001`
+- **Basis-URL:** `http://localhost:5001`
+- **Unterstützte Formate:** JSON (Standard), OData v4
+- **CORS:** Aktiviert für alle Origins
+- **Authentifizierung:** Keine erforderlich (im Gegensatz zur echten SAP SF Umgebung)
 
-**Unterstützte Formate:**
-- JSON (Standard)
-- OData v4 konforme Responses
+---
 
-**CORS:** Aktiviert für alle Origins
+## 2. Schnellstart
 
-## Authentifizierung
+Um den Server zu testen, führen Sie den folgenden Health-Check-Befehl aus:
 
-Der MockServer erfordert keine Authentifizierung. In einer echten SAP SuccessFactors Umgebung würden OAuth 2.0 oder Basic Authentication verwendet.
-
-## REST API Endpunkte
-
-### 1. System-Endpunkte
-
-#### Health Check
-```
-GET /health
+```bash
+curl -X GET http://localhost:5001/health
 ```
 
-**Beschreibung:** Überprüft den Status des Servers
+Sie sollten eine `200 OK` Antwort mit dem folgenden Body erhalten:
 
-**Response:**
 ```json
 {
   "status": "healthy",
@@ -45,629 +34,248 @@ GET /health
 }
 ```
 
+---
+
+## 3. REST API Endpunkte
+
+### 3.1. System-Endpunkte
+
 #### Root Information
-```
-GET /
-```
 
-**Beschreibung:** Gibt grundlegende Informationen über den Service zurück
+- **GET /**
+- **Beschreibung:** Gibt grundlegende Informationen über den Service zurück.
+- **Response:**
+  ```json
+  {
+    "service": "SAP SuccessFactors LMS MockServer",
+    "version": "1.0.0",
+    "description": "Mock server for SAP SuccessFactors Learning Management System API",
+    "endpoints": "See documentation for available endpoints"
+  }
+  ```
 
-**Response:**
-```json
-{
-  "service": "SAP SuccessFactors LMS MockServer",
-  "version": "1.0.0",
-  "description": "Mock server for SAP SuccessFactors Learning Management System API",
-  "endpoints": "See documentation for available endpoints"
-}
-```
+#### Health Check
 
-### 2. Partner Extract Configuration
+- **GET /health**
+- **Beschreibung:** Überprüft den Status des Servers.
+- **Response:**
+  ```json
+  {
+    "status": "healthy",
+    "service": "SAP SuccessFactors LMS MockServer"
+  }
+  ```
 
-#### Get Partner Extract Configuration
-```
-GET /learning/public-api/rest/v1/partnerExtractConfig
-```
+### 3.2. Partner Extract Configuration
 
-**Parameter:**
-- `partnerID` (required): Partner-Identifikator
+#### Konfiguration abrufen
 
-**Beispiel Request:**
-```bash
-curl -X GET "http://localhost:5001/learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001"
-```
-
-**Response:**
-```json
-{
-  "restOperationStatusVOX": {
-    "operation": null,
-    "status": "SUCCESS",
-    "data": {
-      "sftpPath": "/customer/subfolder/path",
-      "partnerID": "PARTNER001",
-      "enabled": true,
-      "email": "partner@example.com",
-      "keyOwner": "SAP_LMS_ADMIN",
-      "encryptionKey": "AES256_ENCRYPTION_KEY_PLACEHOLDER",
-      "lastExtractDate": "2024-01-15T10:30:00Z",
-      "extractFrequency": "DAILY",
-      "configuration": {
-        "includeUserData": true,
-        "includeCourseData": true,
-        "includeCurriculumData": true,
-        "includeCompletionData": true,
-        "dataFormat": "JSON",
-        "compression": "GZIP"
+- **GET /learning/public-api/rest/v1/partnerExtractConfig**
+- **Beschreibung:** Ruft die Konfiguration für einen Partner-Datenextrakt ab.
+- **Query-Parameter:**
+  - `partnerID` (string, **required**): Die ID des Partners.
+- **Beispiel-Request:**
+  ```bash
+  curl -X GET "http://localhost:5001/learning/public-api/rest/v1/partnerExtractConfig?partnerID=PARTNER001"
+  ```
+- **Beispiel-Response:**
+  ```json
+  {
+    "restOperationStatusVOX": {
+      "status": "SUCCESS",
+      "data": {
+        "sftpPath": "/customer/subfolder/path",
+        "partnerID": "PARTNER001",
+        "enabled": true,
+        "email": "partner@example.com",
+        "keyOwner": "SAP_LMS_ADMIN",
+        "encryptionKey": "AES256_ENCRYPTION_KEY_PLACEHOLDER",
+        "lastExtractDate": "2024-01-15T10:30:00Z",
+        "extractFrequency": "DAILY",
+        "configuration": {
+          "includeUserData": true,
+          "includeCourseData": true,
+          "includeCurriculumData": true,
+          "includeCompletionData": true,
+          "dataFormat": "JSON",
+          "compression": "GZIP"
+        }
       }
     }
-  },
-  "errors": null,
-  "warnings": null
-}
-```
-
-#### Update Partner Extract Configuration
-```
-PUT /learning/public-api/rest/v1/partnerExtractConfig
-```
-
-**Request Body:**
-```json
-{
-  "partnerID": "PARTNER001",
-  "sftpPath": "/customer/subfolder/path",
-  "enabled": true,
-  "email": "partner@example.com",
-  "extractFrequency": "DAILY"
-}
-```
-
-### 3. Adhoc Data Extract
-
-#### Create Adhoc Data Extract
-```
-PUT /learning/public-api/rest/v1/adhocDataExtract
-```
-
-**Parameter:**
-- `partnerID` (required): Partner-Identifikator
-
-**Request Body:**
-```json
-{
-  "extractType": "FULL",
-  "dataTypes": ["USERS", "COURSES", "COMPLETIONS"],
-  "dateRange": {
-    "startDate": "2024-01-01T00:00:00Z",
-    "endDate": "2024-01-31T23:59:59Z"
   }
-}
-```
+  ```
 
-**Response:**
-```json
-{
-  "restOperationStatusVOX": {
-    "operation": "ADHOC_EXTRACT",
-    "status": "SUCCESS",
-    "data": {
-      "REST_RETURN_DATA": null
+#### Konfiguration aktualisieren
+
+- **PUT /learning/public-api/rest/v1/partnerExtractConfig**
+- **Beschreibung:** Aktualisiert die Konfiguration für einen Partner-Datenextrakt.
+- **Request Body:**
+  ```json
+  {
+    "partnerID": "PARTNER001",
+    "sftpPath": "/customer/subfolder/path",
+    "enabled": true,
+    "email": "partner@example.com",
+    "extractFrequency": "DAILY"
+  }
+  ```
+
+### 3.3. Adhoc Data Extract
+
+#### Adhoc-Datenextrakt erstellen
+
+- **PUT /learning/public-api/rest/v1/adhocDataExtract**
+- **Beschreibung:** Startet einen Adhoc-Datenextrakt.
+- **Query-Parameter:**
+  - `partnerID` (string, **required**): Die ID des Partners.
+- **Request Body:**
+  ```json
+  {
+    "extractType": "FULL",
+    "dataTypes": ["USERS", "COURSES", "COMPLETIONS"],
+    "dateRange": {
+      "startDate": "2024-01-01T00:00:00Z",
+      "endDate": "2024-01-31T23:59:59Z"
     }
-  },
-  "errors": null,
-  "warnings": null
-}
-```
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "restOperationStatusVOX": {
+      "operation": "ADHOC_EXTRACT",
+      "status": "SUCCESS"
+    }
+  }
+  ```
 
-## OData v4 Services
+---
 
-### 1. Curriculum Services
+## 4. OData v4 Services
 
-#### Admin Curriculum Service
-
-**Basis-URL:** `/learning/odatav4/public/admin/curriculum-service/v1`
-
-##### Service Metadata
-```
-GET /learning/odatav4/public/admin/curriculum-service/v1/$metadata
-```
-
-**Response:** OData v4 Metadata-Dokument mit EntitySets und EntityTypes
-
-##### Get Curricula
-```
-GET /learning/odatav4/public/admin/curriculum-service/v1/Curricula
-```
+Die OData-Services bieten erweiterte Abfragemöglichkeiten.
 
 **Unterstützte Query-Parameter:**
-- `$top`: Anzahl der zurückzugebenden Einträge
-- `$skip`: Anzahl der zu überspringenden Einträge
-- `$count`: Gesamtanzahl einschließen
-- `$filter`: Filterkriterien
-- `$select`: Spezifische Felder auswählen
-- `$orderby`: Sortierung
+- `$top`: Anzahl der zurückzugebenden Einträge.
+- `$skip`: Anzahl der zu überspringenden Einträge.
+- `$count`: Gesamtanzahl der Einträge in die Antwort einschließen.
+- `$filter`: Datensätze basierend auf Bedingungen filtern.
+- `$select`: Nur bestimmte Felder auswählen.
+- `$orderby`: Ergebnisse sortieren.
 
-**Beispiel:**
-```bash
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$top=5&\$count=true"
-```
+### 4.1. Curriculum Services
 
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#Curricula",
-  "@odata.count": 2,
-  "value": [
-    {
-      "curriculumID": "CURR_001",
-      "title": "Management Development Program",
-      "description": "Comprehensive management development curriculum for emerging leaders",
-      "category": "Leadership",
-      "difficulty": "Intermediate",
-      "totalDuration": 40.0,
-      "totalItems": 5,
-      "status": "Active",
-      "createdDate": "2023-01-20T10:00:00Z",
-      "lastModifiedDate": "2023-12-15T14:00:00Z",
-      "language": "English",
-      "items": [
-        {
-          "itemID": "COURSE_001",
-          "title": "Leadership Fundamentals",
-          "type": "Course",
-          "duration": 8.0,
-          "displayOrder": 1
-        }
-      ]
-    }
-  ]
-}
-```
+#### Admin Curriculum Service
+- **Basis-URL:** `/learning/odatav4/public/admin/curriculum-service/v1`
+- **Endpunkte:**
+  - `GET /Curricula`: Ruft eine Liste von Curricula ab.
+  - `GET /$metadata`: Ruft das Service-Metadatendokument ab.
 
 #### User Curriculum Service
+- **Basis-URL:** `/learning/odatav4/public/user/curriculum-service/v1`
+- **Endpunkte:**
+  - `GET /Curricula`: Ruft eine Liste von Curricula mit benutzerspezifischen Daten ab (z.B. `enrollmentStatus`, `completionStatus`).
 
-**Basis-URL:** `/learning/odatav4/public/user/curriculum-service/v1`
-
-##### Get User Curricula
-```
-GET /learning/odatav4/public/user/curriculum-service/v1/Curricula
-```
-
-**Response:** Ähnlich wie Admin-Service, aber mit benutzerspezifischen Feldern:
-- `enrollmentStatus`: Anmeldestatus des Benutzers
-- `completionStatus`: Abschlussstatus
-- `progressPercentage`: Fortschritt in Prozent
-- `enrollmentDate`: Anmeldedatum
-
-### 2. Learning Event Services
+### 4.2. Learning Event Services
 
 #### Admin Learning Event Service
-
-**Basis-URL:** `/learning/odatav4/public/admin/learningevent-service/v1`
-
-##### Record Learning Event
-```
-POST /learning/odatav4/public/admin/learningevent-service/v1/recordLearningEvents
-```
-
-**Request Body:**
-```json
-{
-  "studentID": "USER_001",
-  "courseID": "COURSE_001",
-  "completionDate": "2024-01-15T17:00:00Z",
-  "completionStatus": "Pass",
-  "score": 85.5,
-  "totalHours": 8.0,
-  "contactHours": 8.0,
-  "instructorName": "Dr. Sarah Johnson",
-  "comments": "Excellent performance"
-}
-```
-
-**Response:**
-```json
-{
-  "eventID": "EVENT_USER_001_20240115170000",
-  "studentID": "USER_001",
-  "courseID": "COURSE_001",
-  "completionDate": "2024-01-15T17:00:00Z",
-  "completionStatus": "Pass",
-  "score": 85.5,
-  "totalHours": 8.0,
-  "contactHours": 8.0,
-  "instructorName": "Dr. Sarah Johnson",
-  "comments": "Excellent performance",
-  "recordedBy": "ADMIN_001",
-  "recordedDate": "2024-01-15T17:05:00Z"
-}
-```
+- **Basis-URL:** `/learning/odatav4/public/admin/learningevent-service/v1`
+- **Endpunkte:**
+  - `POST /recordLearningEvents`: Zeichnet ein Lernereignis für einen Benutzer auf.
 
 #### User Learning Event Service
+- **Basis-URL:** `/learning/odatav4/public/user/learningevent-service/v1`
+- **Endpunkte:**
+  - `GET /ExternalLearningEvents`: Ruft extern erfasste Lernereignisse ab.
+  - `POST /ExternalLearningEvents`: Erstellt ein neues externes Lernereignis.
 
-**Basis-URL:** `/learning/odatav4/public/user/learningevent-service/v1`
+### 4.3. Learning Plan Service
+- **Basis-URL:** `/learning/odatav4/public/user/learningplan-service/v1`
+- **Endpunkte:**
+  - `GET /LearningPlans`: Ruft die Lernpläne eines Benutzers ab.
 
-##### Get External Learning Events
-```
-GET /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
-```
-
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#ExternalLearningEvents",
-  "value": [
-    {
-      "eventID": "EXT_EVENT_001",
-      "title": "AWS Cloud Practitioner Certification",
-      "provider": "Amazon Web Services",
-      "completionDate": "2024-01-10T00:00:00Z",
-      "certificateNumber": "AWS-CP-2024-001",
-      "totalHours": 40.0,
-      "description": "Cloud computing fundamentals certification"
-    }
-  ]
-}
-```
-
-##### Create External Learning Event
-```
-POST /learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents
-```
-
-**Request Body:**
-```json
-{
-  "title": "Project Management Professional (PMP)",
-  "provider": "Project Management Institute",
-  "completionDate": "2024-01-20T00:00:00Z",
-  "certificateNumber": "PMP-2024-12345",
-  "totalHours": 35.0,
-  "description": "Professional project management certification"
-}
-```
-
-### 3. Learning Plan Service
-
-**Basis-URL:** `/learning/odatav4/public/user/learningplan-service/v1`
-
-#### Get Learning Plans
-```
-GET /learning/odatav4/public/user/learningplan-service/v1/LearningPlans
-```
-
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#LearningPlans",
-  "value": [
-    {
-      "planID": "PLAN_001",
-      "studentID": "USER_001",
-      "courseID": "COURSE_001",
-      "assignmentDate": "2024-01-01T09:00:00Z",
-      "dueDate": "2024-03-01T17:00:00Z",
-      "completionStatus": "In Progress",
-      "contactHours": 8.0,
-      "totalHours": 8.0,
-      "instructorName": "Dr. Sarah Johnson",
-      "comments": "Excellent progress so far"
-    }
-  ]
-}
-```
-
-### 4. Scheduled Offering Services
+### 4.4. Scheduled Offering Services
 
 #### Admin Scheduled Offering Service
-
-**Basis-URL:** `/learning/odatav4/public/admin/scheduledoffering-service/v1`
-
-##### Get Scheduled Offerings
-```
-GET /learning/odatav4/public/admin/scheduledoffering-service/v1/ScheduledOfferings
-```
-
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#ScheduledOfferings",
-  "value": [
-    {
-      "offeringID": "OFFER_001",
-      "courseID": "COURSE_001",
-      "title": "Leadership Fundamentals - January 2024",
-      "startDate": "2024-01-15T09:00:00Z",
-      "endDate": "2024-01-17T17:00:00Z",
-      "location": "Conference Room A",
-      "maxEnrollment": 20,
-      "currentEnrollment": 15,
-      "status": "Scheduled",
-      "instructors": [
-        {
-          "instructorID": "INST_001",
-          "firstName": "Sarah",
-          "lastName": "Johnson",
-          "primary": true
-        }
-      ]
-    }
-  ]
-}
-```
+- **Basis-URL:** `/learning/odatav4/public/admin/scheduledoffering-service/v1`
+- **Endpunkte:**
+  - `GET /ScheduledOfferings`: Ruft geplante Kursangebote ab.
 
 #### User Scheduled Offering Service
+- **Basis-URL:** `/learning/odatav4/public/user/scheduledoffering-service/v1`
+- **Endpunkte:**
+  - `GET /ScheduledOfferings`: Ruft geplante Kursangebote mit benutzerspezifischem Anmeldestatus ab.
 
-**Basis-URL:** `/learning/odatav4/public/user/scheduledoffering-service/v1`
+### 4.5. Search Services
+- **Basis-URL:** `/learning/odatav4/public/admin/search-service/v1`
+- **Endpunkte:**
+  - `GET /Programs`: Durchsucht Programme.
+  - `GET /Students`: Durchsucht Benutzer (Students).
+  - `GET /Items`: Durchsucht Lernelemente (Items).
 
-##### Get User Scheduled Offerings
-```
-GET /learning/odatav4/public/user/scheduledoffering-service/v1/ScheduledOfferings
-```
-
-**Response:** Ähnlich wie Admin-Service, aber mit benutzerspezifischen Feldern:
-- `enrollmentStatus`: Anmeldestatus des Benutzers
-- `attendanceStatus`: Teilnahmestatus
-
-### 5. Search Services
-
-#### Admin Search Service
-
-**Basis-URL:** `/learning/odatav4/public/admin/search-service/v1`
-
-##### Search Programs
-```
-GET /learning/odatav4/public/admin/search-service/v1/Programs
-```
-
-##### Search Students
-```
-GET /learning/odatav4/public/admin/search-service/v1/Students
-```
-
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#Students",
-  "value": [
-    {
-      "studentID": "USER_001",
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john.doe@company.com",
-      "status": "Active",
-      "department": "Engineering",
-      "jobTitle": "Software Developer",
-      "enrollmentDate": "2023-01-15T09:00:00Z",
-      "lastLoginDate": "2024-01-14T14:30:00Z"
-    }
-  ]
-}
-```
-
-##### Search Items
-```
-GET /learning/odatav4/public/admin/search-service/v1/Items
-```
-
-### 6. User Assignment Services
+### 4.6. User Assignment Services
 
 #### User Assignment Service v1
-
-**Basis-URL:** `/learning/odatav4/public/user/userassignment-service/v1`
-
-##### Get User Program Assignments
-```
-GET /learning/odatav4/public/user/userassignment-service/v1/UserPrograms
-```
+- **Basis-URL:** `/learning/odatav4/public/user/userassignment-service/v1`
+- **Endpunkte:**
+  - `GET /UserPrograms`: Ruft Programmzuweisungen für Benutzer ab.
 
 #### User Assignment Service v2
+- **Basis-URL:** `/learning/odatav4/public/user/userassignment-service/v2`
+- **Endpunkte:**
+  - `POST /itemAssignments`: Weist einem Benutzer ein Lernelement zu.
+  - `POST /removeItemAssignments`: Entfernt eine Lernelement-Zuweisung.
 
-**Basis-URL:** `/learning/odatav4/public/user/userassignment-service/v2`
+### 4.7. User Learning Service
+- **Basis-URL:** `/learning/odatav4/public/user/userlearning-service/v1`
+- **Endpunkte:**
+  - `GET /LearningHistories`: Ruft die Lernhistorie eines Benutzers ab.
 
-##### Create Item Assignment
-```
-POST /learning/odatav4/public/user/userassignment-service/v2/itemAssignments
-```
+### 4.8. User Services
 
-**Request Body:**
-```json
-{
-  "studentID": "USER_001",
-  "itemID": "COURSE_001",
-  "dueDate": "2024-03-01T17:00:00Z",
-  "assignedBy": "SUPERVISOR_001",
-  "priority": "High"
-}
-```
+#### Admin User Services
+- **v1 Basis-URL:** `/learning/odatav4/public/admin/user-service/v1`
+- **v2 Basis-URL:** `/learning/odatav4/public/admin/user-service/v2`
+- **Endpunkte (v2):**
+  - `POST /MergeUsers`: Führt zwei Benutzerkonten zusammen.
+  - `GET /Users`: Ruft Benutzerdaten ab.
 
-**Response:**
-```json
-{
-  "assignmentID": "ASSIGN_20240115170500",
-  "studentID": "USER_001",
-  "itemID": "COURSE_001",
-  "assignmentDate": "2024-01-15T17:05:00Z",
-  "dueDate": "2024-03-01T17:00:00Z",
-  "assignedBy": "SUPERVISOR_001",
-  "priority": "High",
-  "status": "Active"
-}
-```
+#### User Services
+- **v1 Basis-URL:** `/learning/odatav4/public/user/user-service/v1`
+- **v2 Basis-URL:** `/learning/odatav4/public/user/user-service/v2`
+- **Endpunkte:**
+  - `GET /Approvals` (v1): Ruft Genehmigungsanfragen ab.
+  - `GET /UserAssignments` (v2): Ruft Zuweisungen für den Benutzer ab.
 
-##### Remove Item Assignment
-```
-POST /learning/odatav4/public/user/userassignment-service/v2/removeItemAssignments
-```
+### 4.9. Catalog Services
 
-**Request Body:**
-```json
-{
-  "assignmentID": "ASSIGN_001",
-  "removalReason": "Course no longer required"
-}
-```
+#### Allgemeine und Benutzer-Katalogsuche
+- **Allgemein:** `GET /learning/odatav4/catalogSearch/v1/CatalogItems`
+- **Benutzer:** `GET /learning/odatav4/public/user/catalogSearch/v1/CatalogItems`
 
-### 7. User Learning Service
+#### Admin Catalog Service
+- **Basis-URL:** `/learning/odatav4/public/admin/catalog-service/v1`
+- **Endpunkte:**
+  - `GET /CatalogsFeed`: Ruft die Hauptkataloge ab.
+  - `GET /CatalogsFeed/{id}/CoursesFeed`: Kurse in einem Katalog.
+  - `GET /CatalogsFeed/{id}/CurriculaFeed`: Curricula in einem Katalog.
+  - `GET /CatalogsFeed/{id}/ProgramsFeed`: Programme in einem Katalog.
+  - `GET /CatalogsFeed/{id}/CollectionsFeed`: Sammlungen in einem Katalog.
 
-**Basis-URL:** `/learning/odatav4/public/user/userlearning-service/v1`
+### 4.10. Financial Transactions Service
+- **Basis-URL:** `/learning/odatav4/public/admin/financialtransactions/v1`
+- **Endpunkte:**
+  - `GET /FinancialTransactions`: Ruft Finanztransaktionen ab.
 
-#### Get Learning Histories
-```
-GET /learning/odatav4/public/user/userlearning-service/v1/LearningHistories
-```
+---
 
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#LearningHistories",
-  "value": [
-    {
-      "historyID": "HIST_001",
-      "studentID": "USER_001",
-      "courseID": "COURSE_001",
-      "completionDate": "2023-12-15T17:00:00Z",
-      "completionStatus": "Pass",
-      "score": 85.5,
-      "totalHours": 8.0
-    }
-  ]
-}
-```
+## 5. Datenmodelle
 
-### 8. User Services
+Hier sind die primären Datenmodelle, die in den API-Antworten verwendet werden.
 
-#### Admin User Service v1
+<details>
+<summary>Curriculum</summary>
 
-**Basis-URL:** `/learning/odatav4/public/admin/user-service/v1`
-
-#### Admin User Service v2
-
-**Basis-URL:** `/learning/odatav4/public/admin/user-service/v2`
-
-##### Merge Users
-```
-POST /learning/odatav4/public/admin/user-service/v2/MergeUsers
-```
-
-**Request Body:**
-```json
-{
-  "fromUserID": "USER_OLD",
-  "toUserID": "USER_NEW",
-  "fromPersonGUID": "GUID_OLD",
-  "toPersonGUID": "GUID_NEW"
-}
-```
-
-##### Get Users
-```
-GET /learning/odatav4/public/admin/user-service/v2/Users
-```
-
-#### User Service v1
-
-**Basis-URL:** `/learning/odatav4/public/user/user-service/v1`
-
-##### Get Approvals
-```
-GET /learning/odatav4/public/user/user-service/v1/Approvals
-```
-
-#### User Service v2
-
-**Basis-URL:** `/learning/odatav4/public/user/user-service/v2`
-
-##### Get User Assignments
-```
-GET /learning/odatav4/public/user/user-service/v2/UserAssignments
-```
-
-### 9. Catalog Services
-
-#### Catalog Search v1
-
-**Basis-URL:** `/learning/odatav4/catalogSearch/v1`
-
-##### Search Catalog Items
-```
-GET /learning/odatav4/catalogSearch/v1/CatalogItems
-```
-
-#### User Catalog Search v1
-
-**Basis-URL:** `/learning/odatav4/public/user/catalogSearch/v1`
-
-##### Search Catalog Items (User)
-```
-GET /learning/odatav4/public/user/catalogSearch/v1/CatalogItems
-```
-
-#### Admin Catalog Service v1
-
-**Basis-URL:** `/learning/odatav4/public/admin/catalog-service/v1`
-
-##### Get Catalogs
-```
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed
-```
-
-##### Get Catalog Courses
-```
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CoursesFeed
-```
-
-##### Get Catalog Curricula
-```
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CurriculaFeed
-```
-
-##### Get Catalog Programs
-```
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/ProgramsFeed
-```
-
-##### Get Catalog Collections
-```
-GET /learning/odatav4/public/admin/catalog-service/v1/CatalogsFeed/{catalogId}/CollectionsFeed
-```
-
-### 10. Financial Transactions Service
-
-**Basis-URL:** `/learning/odatav4/public/admin/financialtransactions/v1`
-
-#### Get Financial Transactions
-```
-GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransactions
-```
-
-**Response:**
-```json
-{
-  "@odata.context": "$metadata#FinancialTransactions",
-  "value": [
-    {
-      "transactionID": "TXN_001",
-      "orderNo": "ORD_2024_001",
-      "studentID": "USER_001",
-      "courseID": "COURSE_001",
-      "amount": 299.99,
-      "currency": "USD",
-      "transactionType": "Purchase",
-      "transactionDate": "2024-01-15T10:30:00Z",
-      "status": "Completed",
-      "paymentMethod": "Credit Card",
-      "description": "Leadership Fundamentals Course Purchase",
-      "externalTransactionID": "EXT_TXN_12345"
-    }
-  ]
-}
-```
-
-## Datenmodelle
-
-### Curriculum
 ```json
 {
   "curriculumID": "string",
@@ -692,8 +300,11 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   ]
 }
 ```
+</details>
 
-### Course
+<details>
+<summary>Course</summary>
+
 ```json
 {
   "courseID": "string",
@@ -712,8 +323,11 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   "learningObjectives": ["string"]
 }
 ```
+</details>
 
-### Learning Event
+<details>
+<summary>Learning Event</summary>
+
 ```json
 {
   "eventID": "string",
@@ -728,8 +342,11 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   "comments": "string"
 }
 ```
+</details>
 
-### Student
+<details>
+<summary>Student</summary>
+
 ```json
 {
   "studentID": "string",
@@ -743,8 +360,11 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   "lastLoginDate": "datetime"
 }
 ```
+</details>
 
-### Scheduled Offering
+<details>
+<summary>Scheduled Offering</summary>
+
 ```json
 {
   "offeringID": "string",
@@ -766,8 +386,11 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   ]
 }
 ```
+</details>
 
-### Financial Transaction
+<details>
+<summary>Financial Transaction</summary>
+
 ```json
 {
   "transactionID": "string",
@@ -784,128 +407,109 @@ GET /learning/odatav4/public/admin/financialtransactions/v1/FinancialTransaction
   "externalTransactionID": "string"
 }
 ```
+</details>
 
-## Fehlerbehandlung
+---
+
+## 6. Fehlerbehandlung
+
+### HTTP-Statuscodes
+- `200 OK`: Erfolgreiche Anfrage.
+- `201 Created`: Ressource erfolgreich erstellt.
+- `400 Bad Request`: Ungültige Anfrage (z.B. fehlende Parameter).
+- `404 Not Found`: Die angeforderte Ressource wurde nicht gefunden.
+- `500 Internal Server Error`: Ein interner Serverfehler ist aufgetreten.
 
 ### Standard-Fehlerformat
 ```json
 {
   "error": {
     "code": "ERROR_CODE",
-    "message": "Detailed error message"
+    "message": "Eine detaillierte Beschreibung des Fehlers."
   }
 }
 ```
 
-### HTTP-Statuscodes
-- `200 OK`: Erfolgreiche Anfrage
-- `201 Created`: Ressource erfolgreich erstellt
-- `400 Bad Request`: Ungültige Anfrage
-- `404 Not Found`: Ressource nicht gefunden
-- `500 Internal Server Error`: Serverfehler
-
 ### Häufige Fehlercodes
-- `MISSING_PARAM`: Erforderlicher Parameter fehlt
-- `MISSING_FIELD`: Erforderliches Feld im Request Body fehlt
-- `NOT_FOUND`: Angeforderte Ressource nicht gefunden
-- `INTERNAL_ERROR`: Interner Serverfehler
-
-## Beispiele
-
-### Vollständiger Workflow: Curriculum-Management
-
-#### 1. Curricula abrufen
-```bash
-curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
-```
-
-#### 2. Spezifisches Curriculum mit Filterung
-```bash
-curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'"
-```
-
-#### 3. Benutzer-spezifische Curriculum-Ansicht
-```bash
-curl -X GET "http://localhost:5001/learning/odatav4/public/user/curriculum-service/v1/Curricula"
-```
-
-### Vollständiger Workflow: Learning Event Management
-
-#### 1. Lernereignis aufzeichnen (Admin)
-```bash
-curl -X POST "http://localhost:5001/learning/odatav4/public/admin/learningevent-service/v1/recordLearningEvents" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "studentID": "USER_001",
-    "courseID": "COURSE_001",
-    "completionDate": "2024-01-15T17:00:00Z",
-    "completionStatus": "Pass",
-    "score": 85.5,
-    "totalHours": 8.0
-  }'
-```
-
-#### 2. Externes Lernereignis erstellen (Benutzer)
-```bash
-curl -X POST "http://localhost:5001/learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "AWS Certification",
-    "provider": "Amazon Web Services",
-    "completionDate": "2024-01-20T00:00:00Z",
-    "totalHours": 40.0
-  }'
-```
-
-#### 3. Lernhistorie abrufen
-```bash
-curl -X GET "http://localhost:5001/learning/odatav4/public/user/userlearning-service/v1/LearningHistories"
-```
-
-### OData Query-Beispiele
-
-#### Paginierung
-```bash
-# Erste 10 Einträge
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$top=10"
-
-# Nächste 10 Einträge (11-20)
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$top=10&\$skip=10"
-```
-
-#### Filterung
-```bash
-# Aktive Curricula
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'"
-
-# Curricula mit mehr als 5 Items
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=totalItems gt 5"
-```
-
-#### Feldauswahl
-```bash
-# Nur ID und Titel
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$select=curriculumID,title"
-```
-
-#### Sortierung
-```bash
-# Nach Titel sortiert
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$orderby=title"
-
-# Nach Erstellungsdatum absteigend
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$orderby=createdDate desc"
-```
-
-#### Kombinierte Queries
-```bash
-# Aktive Curricula, nur Titel und Status, sortiert nach Titel, erste 5
-curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?\$filter=status eq 'Active'&\$select=curriculumID,title,status&\$orderby=title&\$top=5"
-```
+- `MISSING_PARAM`: Ein erforderlicher Query-Parameter fehlt.
+- `MISSING_FIELD`: Ein erforderliches Feld im Request Body fehlt.
+- `NOT_FOUND`: Die angeforderte Ressource existiert nicht.
+- `INTERNAL_ERROR`: Ein allgemeiner interner Serverfehler.
 
 ---
 
-**Entwickelt von:** Manus AI  
-**Letzte Aktualisierung:** Januar 2024  
-**Version:** 1.0.0
+## 7. Workflows & Beispiele
 
+### Workflow: Curriculum-Management
+
+1.  **Alle Curricula abrufen:**
+    ```bash
+    curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula"
+    ```
+
+2.  **Aktive Curricula filtern:**
+    ```bash
+    curl -X GET "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$filter=status eq 'Active'"
+    ```
+
+3.  **Benutzerspezifische Ansicht abrufen:**
+    ```bash
+    curl -X GET "http://localhost:5001/learning/odatav4/public/user/curriculum-service/v1/Curricula"
+    ```
+
+### Workflow: Learning Event Management
+
+1.  **Lernereignis als Admin aufzeichnen:**
+    ```bash
+    curl -X POST "http://localhost:5001/learning/odatav4/public/admin/learningevent-service/v1/recordLearningEvents" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "studentID": "USER_001",
+        "courseID": "COURSE_001",
+        "completionDate": "2024-01-15T17:00:00Z",
+        "completionStatus": "Pass",
+        "score": 85.5,
+        "totalHours": 8.0
+      }'
+    ```
+
+2.  **Externes Lernereignis als Benutzer erstellen:**
+    ```bash
+    curl -X POST "http://localhost:5001/learning/odatav4/public/user/learningevent-service/v1/ExternalLearningEvents" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "title": "AWS Certification",
+        "provider": "Amazon Web Services",
+        "completionDate": "2024-01-20T00:00:00Z",
+        "totalHours": 40.0
+      }'
+    ```
+
+3.  **Lernhistorie des Benutzers abrufen:**
+    ```bash
+    curl -X GET "http://localhost:5001/learning/odatav4/public/user/userlearning-service/v1/LearningHistories"
+    ```
+
+### OData Query-Beispiele
+
+- **Paginierung (Erste 10, dann nächste 10):**
+  ```bash
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$top=10"
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$top=10&$$skip=10"
+  ```
+
+- **Feldauswahl (Nur ID und Titel):**
+  ```bash
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$select=curriculumID,title"
+  ```
+
+- **Sortierung (Nach Titel aufsteigend):**
+  ```bash
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$orderby=title"
+  ```
+
+- **Kombinierte Abfrage:**
+  ```bash
+  # Aktive Curricula, nur ID/Titel/Status, nach Titel sortiert, die ersten 5
+  curl "http://localhost:5001/learning/odatav4/public/admin/curriculum-service/v1/Curricula?$$filter=status eq 'Active'&$$select=curriculumID,title,status&$$orderby=title&$$top=5"
+  ```
